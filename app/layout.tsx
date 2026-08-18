@@ -65,7 +65,6 @@ import { CurrencyProvider } from "@/components/CurrencyProvider";
 import { FavoritesProvider } from "@/components/FavoritesProvider";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import VisitorTracker from "@/components/VisitorTracker";
-import SplashScreen from "@/components/SplashScreen";
 import MobileBottomNav from "@/components/MobileBottomNav";
 
 export default async function RootLayout({
@@ -73,7 +72,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const store = await getStoreConfig()
   let currency = "ر.س"
   try {
     const paymentSettings = await prisma.paymentSettings.findUnique({
@@ -88,7 +86,6 @@ export default async function RootLayout({
   return (
     <html lang="ar" dir="rtl" className={`${tajawal.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col font-sans bg-surface text-foreground overflow-x-hidden pb-16 md:pb-0">
-        <SplashScreen storeName={store.name} storeNameLatin={store.nameLatin} />
         <VisitorTracker />
         <CurrencyProvider currency={currency}>
           <ToastProvider>

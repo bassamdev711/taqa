@@ -1,10 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
   <title>TAQA HOME</title>
-  <desc>علامة طاقة هوم الشمسية</desc>
-  <rect width="64" height="64" rx="16" fill="#0b232b"/>
-  <circle cx="32" cy="29" r="11" fill="#efb34a"/>
-  <g stroke="#efb34a" stroke-linecap="round" stroke-width="3">
-    <path d="M32 9v6M32 43v6M12 29h6M46 29h6M18 15l4 4M42 39l4 4M46 15l-4 4M22 39l-4 4"/>
-  </g>
-  <path d="M25 25h14v5H30v4h8c2.8 0 5 2.2 5 5s-2.2 5-5 5H25v-5h12v-3h-7c-2.8 0-5-2.2-5-5s2.2-5 5-5Z" fill="#0b232b"/>
+  <desc>رمز بيت طاقة هوم</desc>
+  <rect width="64" height="64" rx="18" fill="#0b232b"/>
+  <circle cx="32" cy="32" r="20" fill="#efb34a"/>
+  <circle cx="32" cy="23" r="5" fill="none" stroke="#0b232b" stroke-width="2.4"/>
+  <path d="M32 14v4M32 28v4M23 23h4M37 23h4M25.6 16.6l2.8 2.8M35.6 26.6l2.8 2.8M38.4 16.6l-2.8 2.8M28.4 26.6l-2.8 2.8" stroke="#0b232b" stroke-linecap="round" stroke-width="2.2"/>
+  <path d="M20 32.5 32 23l12 9.5v12.2a2.3 2.3 0 0 1-2.3 2.3H22.3a2.3 2.3 0 0 1-2.3-2.3Z" fill="#0b232b"/>
+  <path d="M28 47V38h8v9" fill="#efb34a"/>
+  <path d="M24 34h16" stroke="#efb34a" stroke-linecap="round" stroke-width="2"/>
 </svg>

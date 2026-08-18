@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowDownLeft, ArrowLeft, CircleCheck, Grid2X2, Sun, Zap } from "lucide-react";
+import { ArrowDownLeft, ArrowLeft, CircleCheck, Sun } from "lucide-react";
 
 type HeroData = {
   heroTitle?: string | null;
@@ -46,9 +46,8 @@ export default function Hero({ data = {}, brandName = "طاقة هوم", brandNa
         </motion.div>
 
         <motion.div initial={{ opacity: 0, scale: 0.94, y: 18 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 1, delay: 0.12 }} className="order-1 relative mx-auto w-full max-w-[700px] lg:order-2">
-          <div className="absolute -right-2 top-3 z-30 flex items-center gap-2 rounded-xl border border-white/15 bg-brand/70 px-3 py-2 text-[10px] text-surface/70 backdrop-blur-xl sm:-right-6 sm:top-8"><span className="h-2 w-2 rounded-full bg-accent shadow-[0_0_0_5px_rgba(239,179,74,0.15)]" /> النظام يعمل بكفاءة</div>
           <div className="relative aspect-[1.08/1] overflow-hidden rounded-[2rem] border border-white/15 bg-[#0d2932] shadow-[0_40px_100px_-35px_rgba(0,0,0,0.8)] sm:rounded-[2.6rem]">
-            <div className="absolute left-6 top-6 z-20 flex items-center gap-2 text-[9px] font-black tracking-[0.25em] text-surface/40 sm:left-9 sm:top-9"><Grid2X2 size={13} /> {brandNameLatin}</div>
+            <div className="absolute left-6 top-6 z-20 text-[9px] font-black tracking-[0.25em] text-surface/40 sm:left-9 sm:top-9">{brandNameLatin}</div>
             <div className="absolute bottom-7 right-7 z-20 max-w-[130px] text-right sm:bottom-10 sm:right-10"><span className="block text-[9px] font-black tracking-[0.22em] text-accent">THE HOME SYSTEM</span><p className="mt-2 text-xs leading-6 text-surface/55">حين تعمل التفاصيل معاً، تشعر بالفرق.</p></div>
 
             <div className="absolute inset-0 flex items-center justify-center">
@@ -65,9 +64,8 @@ export default function Hero({ data = {}, brandName = "طاقة هوم", brandNa
               <div className="absolute bottom-[18%] right-[15%] h-[38%] w-[15%] rounded-[1.1rem] border border-white/25 bg-gradient-to-b from-[#edf3ef] to-[#9ab9b1] shadow-[14px_20px_30px_-18px_rgba(0,0,0,0.7)] sm:right-[17%] sm:w-[14%]"><div className="absolute bottom-3 left-1/2 h-1 w-7 -translate-x-1/2 rounded-full bg-accent/75" /></div>
             </div>
 
-            <div className="absolute bottom-5 left-5 right-5 z-20 flex items-center justify-between rounded-2xl border border-white/15 bg-white/10 px-4 py-3 backdrop-blur-xl sm:bottom-8 sm:left-8 sm:right-8 sm:px-5"><div><p className="text-[9px] font-black tracking-[0.2em] text-accent">ENERGY / 01</p><p className="mt-1 text-sm font-bold text-surface">تقنية تحسّن إيقاع يومك</p></div><span className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent text-brand"><Zap size={17} fill="currentColor" /></span></div>
+            <div className="absolute bottom-7 left-7 right-7 z-20 flex items-end justify-between border-t border-white/15 pt-4 sm:bottom-9 sm:left-9 sm:right-9"><div><p className="text-[9px] font-black tracking-[0.2em] text-accent">ENERGY / 01</p><p className="mt-1 text-xs font-bold text-surface/72">تقنية تحسّن إيقاع يومك</p></div><span className="text-[9px] font-black tracking-[0.18em] text-surface/35">HOME SYSTEM</span></div>
           </div>
-          <div className="absolute -bottom-5 -left-3 z-30 rounded-2xl border border-brand/10 bg-surface px-4 py-3 text-brand shadow-xl sm:-left-7"><p className="text-[9px] font-black tracking-[0.2em] text-green">SOLAR READY</p><p className="mt-1 text-xs font-black">جاهز لطاقة الغد</p></div>
         </motion.div>
       </div>
       <div className="absolute bottom-5 left-1/2 hidden -translate-x-1/2 items-center gap-3 text-[9px] font-black tracking-[0.25em] text-surface/35 lg:flex"><span className="h-px w-10 bg-surface/25" /> SCROLL TO EXPLORE <span className="h-px w-10 bg-surface/25" /></div>
