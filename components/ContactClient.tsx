@@ -13,9 +13,9 @@ type ContactData = {
 };
 
 export default function ContactClient({ contactData }: { contactData?: ContactData | null }) {
-  const phone = contactData?.phoneNumber || "+967 777 777 777";
-  const email = contactData?.emailAddress || "hello@example-store.com";
-  const address = contactData?.address || "صنعاء، الجمهورية اليمنية";
+  const phone = contactData?.phoneNumber?.trim() || null;
+  const email = contactData?.emailAddress?.trim() || null;
+  const address = contactData?.address?.trim() || null;
   const [formData, setFormData] = useState({ name: "", phone: "", email: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { showToast } = useToast();
@@ -45,9 +45,9 @@ export default function ContactClient({ contactData }: { contactData?: ContactDa
             <h3 className="text-2xl font-black sm:text-3xl">استشارة قبل الشراء</h3>
             <p className="mt-4 text-sm leading-7 text-surface/65">نساعدك في مقارنة السعة، استهلاك الكهرباء، خيارات التركيب، وما يناسب مساحة منزلك.</p>
             <div className="mt-10 space-y-6">
-              {contactData?.showPhoneNumber !== false && <div className="flex items-start gap-4"><span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-accent"><Phone size={18} /></span><div><p className="text-xs text-surface/45">اتصل أو تواصل عبر واتساب</p><p className="mt-1 font-bold" dir="ltr">{phone}</p></div></div>}
-              {contactData?.showEmailAddress !== false && <div className="flex items-start gap-4"><span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-accent"><Mail size={18} /></span><div><p className="text-xs text-surface/45">البريد الإلكتروني</p><p className="mt-1 font-bold">{email}</p></div></div>}
-              {contactData?.showAddress !== false && <div className="flex items-start gap-4"><span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-accent"><MapPin size={18} /></span><div><p className="text-xs text-surface/45">نخدمك من</p><p className="mt-1 font-bold">{address}</p></div></div>}
+              {contactData?.showPhoneNumber !== false && phone && <div className="flex items-start gap-4"><span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-accent"><Phone size={18} /></span><div><p className="text-xs text-surface/45">اتصل أو تواصل عبر واتساب</p><p className="mt-1 font-bold" dir="ltr">{phone}</p></div></div>}
+              {contactData?.showEmailAddress !== false && email && <div className="flex items-start gap-4"><span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-accent"><Mail size={18} /></span><div><p className="text-xs text-surface/45">البريد الإلكتروني</p><p className="mt-1 font-bold">{email}</p></div></div>}
+              {contactData?.showAddress !== false && address && <div className="flex items-start gap-4"><span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-accent"><MapPin size={18} /></span><div><p className="text-xs text-surface/45">نخدمك من</p><p className="mt-1 font-bold">{address}</p></div></div>}
             </div>
           </motion.div>
 

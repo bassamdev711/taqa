@@ -7,10 +7,10 @@ import TrackOrderClient from './TrackOrderClient'
 import { getStoreConfig } from '@/lib/store-config'
 
 export async function generateMetadata(): Promise<Metadata> {
-  const store = await getStoreConfig()
+  await getStoreConfig()
   return {
-    title: `تتبع الطلب | ${store.name}`,
-    description: `تتبع حالة طلبك من ${store.name} بكل سهولة`,
+    title: 'تتبع الطلب',
+    description: 'تتبع حالة طلبك من TAQA HOME بكل سهولة.',
   }
 }
 

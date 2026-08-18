@@ -9,8 +9,8 @@ import { getStoreConfig } from '@/lib/store-config'
 import { ArrowDownLeft, Sparkles } from 'lucide-react'
 
 export async function generateMetadata(): Promise<Metadata> {
-  const store = await getStoreConfig()
-  return { title: `الكتالوج | ${store.name}`, description: `تشكيلة الأجهزة المنزلية والطاقة الشمسية من ${store.name}` }
+  await getStoreConfig()
+  return { title: 'الكتالوج', description: 'تشكيلة الأجهزة المنزلية والطاقة الشمسية من TAQA HOME.' }
 }
 
 export const dynamic = 'force-dynamic'

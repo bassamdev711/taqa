@@ -5,8 +5,8 @@ import { Metadata } from 'next'
 import { getStoreConfig } from '@/lib/store-config'
 
 export async function generateMetadata(): Promise<Metadata> {
-  const store = await getStoreConfig()
-  return { title: `السلة | ${store.name}` }
+  await getStoreConfig()
+  return { title: 'السلة' }
 }
 
 export default function CartPage() {

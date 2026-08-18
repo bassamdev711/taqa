@@ -1,12 +1,12 @@
 import type { MetadataRoute } from 'next'
 
-const DEFAULT_SITE_URL = 'https://example-store.vercel.app'
-
-function getBaseUrl(): string {
+function getBaseUrl(): string | undefined {
+  const configuredUrl = process.env.NEXT_PUBLIC_SITE_URL
+  if (!configuredUrl) return undefined
   try {
-    return new URL(process.env.NEXT_PUBLIC_SITE_URL || DEFAULT_SITE_URL).origin
+    return new URL(configuredUrl).origin
   } catch {
-    return DEFAULT_SITE_URL
+    return undefined
   }
 }
 
@@ -28,6 +28,6 @@ export default function robots(): MetadataRoute.Robots {
         '/_next',
       ],
     },
-    sitemap: `${baseUrl}/sitemap.xml`,
+    ...(baseUrl ? { sitemap: `${baseUrl}/sitemap.xml` } : {}),
   }
 }

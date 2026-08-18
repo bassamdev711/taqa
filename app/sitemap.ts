@@ -1,20 +1,21 @@
 import type { MetadataRoute } from 'next'
 import prisma from '@/lib/prisma'
 
-const DEFAULT_SITE_URL = 'https://example-store.vercel.app'
-
 type SitemapRecord = { slug: string; updatedAt: Date }
 
-function getBaseUrl(): string {
+function getBaseUrl(): string | undefined {
+  const configuredUrl = process.env.NEXT_PUBLIC_SITE_URL
+  if (!configuredUrl) return undefined
   try {
-    return new URL(process.env.NEXT_PUBLIC_SITE_URL || DEFAULT_SITE_URL).origin
+    return new URL(configuredUrl).origin
   } catch {
-    return DEFAULT_SITE_URL
+    return undefined
   }
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = getBaseUrl()
+  if (!baseUrl) return []
 
   if (!process.env.DATABASE_URL) {
     return ['', '/products', '/contact'].map((route) => ({

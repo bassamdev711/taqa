@@ -4,10 +4,10 @@ import FavoritesClient from "./FavoritesClient";
 import { getStoreConfig } from '@/lib/store-config'
 
 export async function generateMetadata() {
-  const store = await getStoreConfig()
+  await getStoreConfig()
   return {
-    title: `المفضلة | ${store.name}`,
-    description: `منتجاتك المفضلة من ${store.name}`,
+    title: 'المفضلة',
+    description: 'المنتجات التي اخترتها لبيتك من TAQA HOME.',
   }
 }
 

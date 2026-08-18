@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import { Tajawal } from "next/font/google";
 import "./globals.css";
 
@@ -13,29 +14,44 @@ const tajawal = Tajawal({
 
 export async function generateMetadata(): Promise<Metadata> {
   const store = await getStoreConfig()
+  const requestHeaders = await headers()
+  const requestHost = requestHeaders.get('x-forwarded-host') || requestHeaders.get('host')
+  const requestProtocol = requestHeaders.get('x-forwarded-proto') || 'http'
+  const requestSiteUrl = requestHost ? getSiteUrl(`${requestProtocol}://${requestHost}`) : undefined
   const title = store.nameLatin && store.name !== store.nameLatin
     ? `${store.name} | ${store.nameLatin}`
     : store.name
+  const siteUrl = getSiteUrl(store.storeUrl) || requestSiteUrl
+  const shareImage = siteUrl ? (store.ogImageUrl || '/taqa-home-og.png') : (store.ogImageUrl?.startsWith('http') ? store.ogImageUrl : undefined)
 
   return {
-    metadataBase: getSiteUrl(store.storeUrl),
-    title,
+    ...(siteUrl ? { metadataBase: siteUrl } : {}),
+    title: {
+      default: title,
+      template: `%s | ${store.nameLatin || 'TAQA HOME'}`,
+    },
     description: store.description,
+    applicationName: store.nameLatin || 'TAQA HOME',
+    generator: 'TAQA HOME',
+    keywords: ['طاقة هوم', 'TAQA HOME', 'أجهزة منزلية', 'غسالات', 'ثلاجات', 'أجهزة المطبخ', 'الطاقة الشمسية'],
     openGraph: {
+      type: 'website',
+      locale: 'ar_YE',
+      siteName: store.nameLatin || 'TAQA HOME',
       title,
       description: store.description,
-      ...(store.ogImageUrl ? { images: [{ url: store.ogImageUrl, width: 1200, height: 630 }] } : {}),
+      ...(shareImage ? { images: [{ url: shareImage, width: 1200, height: 630, alt: 'طاقة هوم | TAQA HOME' }] } : {}),
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description: store.description,
-      ...(store.ogImageUrl ? { images: [store.ogImageUrl] } : {}),
+      ...(shareImage ? { images: [shareImage] } : {}),
     },
     icons: {
-      icon: store.faviconUrl ?? '/favicon.ico',
-      shortcut: store.faviconUrl ?? '/favicon.ico',
-      apple: store.faviconUrl ?? '/favicon.ico',
+      icon: store.faviconUrl || '/taqa-mark.svg',
+      shortcut: store.faviconUrl || '/taqa-mark.svg',
+      apple: store.faviconUrl || '/taqa-mark.svg',
     },
   }
 }
