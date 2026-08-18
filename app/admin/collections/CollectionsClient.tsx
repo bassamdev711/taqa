@@ -189,20 +189,20 @@ export default function CollectionsClient({
                     value={formData.name}
                     onChange={e => setFormData({...formData, name: e.target.value})}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600" 
-                    placeholder="مثال: المجموعة الشرقية" 
+                    placeholder="مثال: الغسيل والعناية"
                   />
                 </div>
                 <div className="flex flex-col gap-2">
                   <label className="text-sm font-bold text-gray-700">نهاية رابط التصنيف (باللغة الإنجليزية وبدون مسافات) *</label>
                   <div className="flex rounded-lg shadow-sm" dir="ltr">
                     <span className="inline-flex items-center rounded-l-lg border border-r-0 border-gray-300 px-3 text-gray-500 sm:text-sm bg-gray-50">
-                      https://example-store.com/collections/
+                      https://your-domain.com/collections/
                     </span>
                     <input 
                       value={formData.slug}
                       onChange={e => setFormData({...formData, slug: e.target.value})}
                       className="w-full min-w-0 flex-1 rounded-none rounded-r-lg border-gray-300 border px-4 py-2 text-left focus:outline-none focus:border-emerald-600" 
-                      placeholder="oriental-collection" 
+                      placeholder="washing-care"
                     />
                   </div>
                   <p className="mt-1 text-xs text-gray-500 text-right">يُستخدم هذا الرابط لمشاركة التصنيف. يرجى استخدام حروف إنجليزية وشرطات (-) بدلاً من المسافات.</p>

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "sh scripts/prepare-vercel-build.sh && prisma generate && next build",
+    "build": "prisma generate && sh scripts/prepare-vercel-build.sh && next build",
     "db:push": "sh scripts/prisma-with-direct-url.sh db push",
     "db:seed:demo": "SEED_DEMO_DATA=true sh scripts/prisma-with-direct-url.sh db seed",
     "db:bootstrap:demo": "sh scripts/prisma-with-direct-url.sh db push && SEED_DEMO_DATA=true sh scripts/prisma-with-direct-url.sh db seed",
@@ -46,9 +46,10 @@
     "eslint-config-next": "16.3.1",
     "prisma": "^5.22.0",
     "tailwindcss": "^4",
+    "tsx": "^4.19.1",
     "typescript": "^5"
   },
   "prisma": {
-    "seed": "npx tsx prisma/seed.ts"
+    "seed": "tsx prisma/seed.ts"
   }
 }

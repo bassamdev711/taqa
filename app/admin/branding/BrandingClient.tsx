@@ -425,7 +425,7 @@ export default function BrandingClient({ initial }: BrandingClientProps) {
             type="url"
             value={storeUrl}
             onChange={(e) => setStoreUrl(e.target.value)}
-            placeholder="https://example-store.com"
+            placeholder="https://your-domain.com"
             dir="ltr"
             className="flex-1 border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-brand transition-colors"
           />

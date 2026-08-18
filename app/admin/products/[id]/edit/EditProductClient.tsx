@@ -146,7 +146,7 @@ export default function EditProductClient({ product, collections = [] }: { produ
                   <label className="block text-sm font-medium text-gray-700 mb-1">نهاية رابط المنتج (Slug) *</label>
                   <div className="flex rounded-md shadow-sm" dir="ltr">
                     <span className="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 px-3 text-gray-500 sm:text-sm bg-gray-50">
-                      https://example-store.com/products/
+                      https://your-domain.com/products/
                     </span>
                     <input type="text" name="slug" required value={slug} onChange={(e) => setSlug(e.target.value)}
                       className="w-full min-w-0 flex-1 rounded-none rounded-r-md border-gray-300 border p-2 text-sm text-gray-900 bg-white focus:border-black focus:outline-none" />

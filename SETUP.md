@@ -1,4 +1,4 @@
-# دليل إعداد مشروع طيف (TIF Store)
+# دليل إعداد مشروع طاقة هوم | TAQA HOME
 
 > وثيقة تقنية كاملة تشرح كيفية إعداد المشروع من الصفر، مع توثيق الأخطاء الشائعة وحلولها.
 
@@ -29,61 +29,24 @@ JWT_SECRET="your-secret-key-min-32-chars"
 # تخزين الصور (Vercel Blob)
 BLOB_READ_WRITE_TOKEN="vercel_blob_rw_..."
 
-# ربط إحصائيات Vercel (مهم - راجع التعليمات أدناه)
-TIF_API_TOKEN=""
-TIF_PROJECT_ID=""
+# تفعيل الكتالوج التجريبي مرة واحدة من Vercel
+SEED_DEMO_DATA="false"
 ```
 
-### 2. متغيرات Vercel (Production) - تُضاف يدوياً في لوحة Vercel
+### 2. متغيرات Vercel (Production) — تُضاف يدوياً من لوحة المشروع
 
-نفس المتغيرات أعلاه، بالإضافة إلى ضمان وجود `TIF_API_TOKEN` و `TIF_PROJECT_ID`.
+أضف أو تحقق من وجود المتغيرات التالية في **Project → Settings → Environment Variables**:
 
----
-
-## 🔑 إعداد ربط إحصائيات Vercel (TIF_API_TOKEN)
-
-> ⚠️ **تحذير مهم جداً للمطورين:**
-> يجب استخدام البادئة `TIF_` وليس `VERCEL_` لأن Vercel يحجب تلقائياً
-> أي متغير يبدأ بـ `VERCEL_` داخل الـ Serverless Functions لأسباب أمنية.
-> استخدام `VERCEL_API_TOKEN` لن يعمل أبداً من داخل كود Next.js.
-
-### الخطوات الصحيحة:
-
-#### الخطوة 1: إنشاء API Token
-1. اذهب إلى: https://vercel.com/account/tokens
-2. اضغط **Create**
-3. أدخل اسماً (مثل: `tif-analytics`)
-4. انسخ الرمز الظاهر (لن يظهر مرة أخرى)
-
-#### الخطوة 2: الحصول على Project ID
-شغّل هذا الأمر في PowerShell (استبدل TOKEN برمزك):
-```powershell
-$headers = @{ "Authorization" = "Bearer YOUR_TOKEN" }
-$res = Invoke-RestMethod -Uri "https://api.vercel.com/v9/projects" -Headers $headers
-$res.projects | Select-Object id, name
-```
-سيظهر لك ID المشروع بصيغة: `prj_xxxxxxxxxxxxxx`
-
-#### الخطوة 3: إضافة المتغيرات لـ Vercel عبر API
-```powershell
-$token = "YOUR_TOKEN"
-$projectId = "prj_YOUR_PROJECT_ID"
-$teamId = "team_YOUR_TEAM_ID"  # يظهر في الخطوة 2 كـ accountId
-$headers = @{ "Authorization" = "Bearer $token"; "Content-Type" = "application/json" }
-
-$vars = @(
-  @{ key = "TIF_API_TOKEN"; value = $token; type = "encrypted"; target = @("production","preview") },
-  @{ key = "TIF_PROJECT_ID"; value = $projectId; type = "plain"; target = @("production","preview") }
-)
-$body = $vars | ConvertTo-Json -Depth 5
-Invoke-RestMethod -Uri "https://api.vercel.com/v10/projects/$projectId/env?teamId=$teamId" -Method POST -Headers $headers -Body $body
+```text
+DATABASE_URL=اتصال PostgreSQL المستخدم في التطبيق
+DIRECT_URL=الاتصال المباشر إن كان مزود قاعدة البيانات يوفره
+BLOB_READ_WRITE_TOKEN=رمز Vercel Blob إن كانت خاصية رفع الصور مفعلة
+SEED_DEMO_DATA=true  # فعّله أثناء تهيئة الكتالوج فقط
 ```
 
-#### الخطوة 4: Redeploy
-بعد إضافة المتغيرات، يجب إعادة بناء المشروع:
-```bash
-git commit --allow-empty -m "Trigger redeploy" && git push
-```
+بعد إضافة `SEED_DEMO_DATA=true`، نفّذ **Redeploy** من صفحة Deployments. راقب السجل حتى تظهر رسالة إتمام seed، ثم عطّل المتغير وأعد النشر مرة أخرى.
+
+> لا تحفظ أي قيمة سرية في GitHub، ولا تستبدل `DATABASE_URL` أو `DIRECT_URL` بقيم تجريبية.
 
 ---
 
@@ -159,7 +122,7 @@ tif/
 |-------|-------|------|
 | `DIRECT_URL not found` | المتغير غير موجود في Vercel | أضف `DIRECT_URL` في Environment Variables |
 | `StoreSettings.ogImageUrl does not exist` | Schema لم يُطبَّق على DB | `prisma db push` سيُشغَّل تلقائياً عند البناء |
-| `غير متصل بـ Vercel API` | استخدام `VERCEL_` كبادئة | استخدم `TIF_API_TOKEN` و `TIF_PROJECT_ID` بدلاً منها |
+| `لا توجد منتجات` بعد نجاح البناء | لم يتم تشغيل seed التجريبي | أضف `SEED_DEMO_DATA=true` في Vercel ثم أعد النشر مرة واحدة |
 | `Project not found` في Vercel API | Project ID خاطئ | احصل على ID الصحيح عبر `GET /v9/projects` |
 
 ---

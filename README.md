@@ -1,55 +1,47 @@
-# TIF: The Art of Olfactory Light
+# TAQA HOME
 
-[Arabic Version / النسخة العربية](./README_AR.md)
+TAQA HOME is a premium Arabic-first storefront for household electrical appliances and solar-energy solutions. The experience uses a quiet architectural visual language, clear product specifications, and an e-commerce foundation that preserves cart, checkout, orders, authentication, and administration.
 
----
+## Product scope
 
+The catalog covers washing machines, refrigerators, kitchen appliances, dishwashers, cleaning devices, air conditioning, water heating, solar energy, energy storage, and smart lighting and tools.
 
-TIF is a high-performance, cinematic e-commerce platform dedicated to luxury fragrances. It integrates advanced 3D rendering with minimalist design principles to create an immersive digital boutique.
+The demo catalog contains ten collections and one hundred products, with ten products per collection. Product images used by the demo seed are local SVG assets under `public/products/`.
 
-## Technical Architecture
+## Stack
 
-### Core Technologies
-- **Frontend Framework**: Next.js 16 (Turbopack optimized)
-- **Programming Language**: TypeScript
-- **Style Engine**: Tailwind CSS v4
-- **3D Implementation**: Three.js & React Three Fiber (R3F)
-- **Motion Orchestration**: Framer Motion
-- **Interface Icons**: Lucide
+- Next.js 16.3.1 with App Router and TypeScript
+- Prisma 5.22 with PostgreSQL
+- Tailwind CSS v4
+- Framer Motion and Lucide React
+- Arabic-first layout using Tajawal
+- Vercel deployment with optional Neon direct connection
 
-### System Directory Structure
-- `/app`: Centralized routing and page management.
-- `/components`: Modular UI architecture (Hero, Products, Stats, About).
-- `/lib`: Functional utilities including URI-encoded order management.
-- `/public`: High-fidelity asset management for cinematic visuals.
+## Commands
 
-## Distinctive Features
-
-### 1. Kinetic Typography & Preloading
-A minimalist gateway experience utilizing a rotating crystalline ring and precise scaling animations to maintain brand prestige during asset initialization.
-
-### 2. Realistic 3D Visualization
-Dynamic rendering of perfume vessels using real-time lighting environments, enabling a tactile sense of luxury within the browser environment.
-
-### 3. Responsive Fluid Layout
-A mobile-first horizontal snap-slider designed to replicate the experience of browsing a high-end physical portfolio.
-
-### 4. Integrated Order Transmission
-A secure utility for constructing structured product inquiries, facilitating direct communication via global messaging APIs.
-
-## Deployment & Execution
-
-### Development Environment
 ```bash
 npm install
 npm run dev
-```
-
-### Production Synthesis
-```bash
+npm run lint
 npm run build
-npm start
 ```
 
+## Database setup
 
-© 2026 TIF. Developed with a focus on Quiet Luxury and Technical Excellence.
+The production build runs `prisma generate`, applies the current Prisma schema when a database connection exists, and then builds the Next.js application. The connection wrapper prefers `DIRECT_URL` and falls back to `DATABASE_URL`.
+
+To initialize the demo catalog from a machine that has the project and database environment variables:
+
+```bash
+npm run db:bootstrap:demo
+```
+
+When working only from Vercel, add `SEED_DEMO_DATA=true` to the Production environment variables and redeploy once. The build will create the schema and seed ten collections and one hundred demo products. Disable the variable after the successful deployment so the demo seed does not run on later builds.
+
+Never commit `.env` files or database credentials. See [SETUP.md](./SETUP.md) for the complete Vercel and database procedure.
+
+## Repository
+
+The source repository is [bassamdev711/taqa](https://github.com/bassamdev711/taqa), deployed as the `taqa` Vercel project.
+
+© 2026 TAQA HOME. Built for clearer homes and smarter energy.
