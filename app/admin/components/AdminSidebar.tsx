@@ -58,9 +58,9 @@ export default function AdminSidebar({
   ]
 
   return (
-    <div dir="rtl" className="flex flex-col flex-1 overflow-hidden bg-ivory font-sans text-deep-green w-full h-full">
+    <div dir="rtl" className="flex flex-col flex-1 overflow-hidden bg-[#f1eee7] font-sans text-[#17323a] w-full h-full">
       {/* Mobile Header (Hamburger Menu) - Now a standard flex child, no sticky needed */}
-      <div className="md:hidden bg-emerald border-b border-emerald/80 flex items-center justify-between p-4 text-ivory w-full flex-shrink-0 z-40">
+      <div className="md:hidden bg-[#123c40] border-b border-[#2c6259] flex items-center justify-between p-4 text-[#f1eee7] w-full flex-shrink-0 z-40">
         <div className="flex items-center gap-3">
           <button onClick={() => setIsOpen(!isOpen)} className="text-white focus:outline-none">
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -95,7 +95,7 @@ export default function AdminSidebar({
         {/* Sidebar Content */}
         <aside className={`
           absolute md:relative inset-y-0 right-0 z-50 
-          w-64 bg-emerald border-l border-emerald shadow-2xl flex-shrink-0 text-ivory
+          w-64 bg-[#123c40] border-l border-[#2c6259] shadow-2xl flex-shrink-0 text-[#f1eee7]
           transform transition-transform duration-300 ease-in-out h-full overflow-y-auto
           ${isOpen ? 'translate-x-0' : 'translate-x-full md:translate-x-0'}
         `}>
@@ -106,8 +106,8 @@ export default function AdminSidebar({
             </Link>
 
             {profile && (
-              <div className="mt-8 flex items-center gap-3 bg-white/5 p-3 rounded-xl border border-white/10">
-                <div className="w-10 h-10 rounded-full overflow-hidden bg-white/10 flex-shrink-0 flex items-center justify-center relative border border-white/20">
+              <div className="mt-8 flex items-center gap-3 bg-[#1c4d4b] p-3 rounded-xl border border-[#5b8170]/60">
+                <div className="w-10 h-10 rounded-full overflow-hidden bg-[#2d665f] flex-shrink-0 flex items-center justify-center relative border border-[#8eae9e]/60">
                   {profile.avatarUrl ? (
                     <Image src={profile.avatarUrl} alt={profile.name} fill sizes="40px" className="object-cover" />
                   ) : (
@@ -136,8 +136,8 @@ export default function AdminSidebar({
                   onClick={closeSidebar}
                   className={`flex items-center gap-3 px-4 py-3 text-sm font-bold rounded-sm transition-colors ${
                     isActive 
-                    ? 'bg-white/10 text-gold' 
-                    : 'text-ivory/80 hover:bg-white/10 hover:text-gold'
+                    ? 'bg-[#efb34a] text-[#0b232b] shadow-[0_8px_20px_-10px_rgba(239,179,74,0.9)]'
+                    : 'text-[#f1eee7]/90 hover:bg-[#1c4d4b] hover:text-[#ffd478]'
                   }`}
                 >
                   <Icon className="w-5 h-5" />
@@ -149,7 +149,7 @@ export default function AdminSidebar({
             <div className="pt-8 mt-8 border-t border-white/10 px-4">
               <Link 
                 href="/" 
-                className="flex items-center gap-2 text-xs font-medium text-ivory/40 hover:text-white transition-colors mb-4"
+                className="flex items-center gap-2 text-xs font-medium text-[#f1eee7]/70 hover:text-white transition-colors mb-4"
               >
                 <ArrowRight className="w-4 h-4" />
                 العودة للمتجر
