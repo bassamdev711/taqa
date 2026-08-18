@@ -15,10 +15,10 @@ export type StoreConfig = {
 }
 
 export const DEFAULT_STORE_CONFIG: StoreConfig = {
-  name: 'متجرك',
-  nameLatin: 'YOUR STORE',
-  tagline: 'منتجات مختارة بعناية، وتجربة تستحق التذكر.',
-  description: 'اكتشف مجموعة مختارة من المنتجات مع تجربة تسوق واضحة وآمنة ومصممة لعلامتك التجارية.',
+  name: 'طاقة هوم',
+  nameLatin: 'TAQA HOME',
+  tagline: 'أجهزة منزلية أذكى، وطاقة شمسية لبيت أكثر كفاءة.',
+  description: 'اكتشف الغسالات والثلاجات وأجهزة المطبخ وحلول الطاقة الشمسية، مع مواصفات واضحة وخدمة موثوقة من الاختيار حتى ما بعد التركيب.',
   logoUrl: null,
   faviconUrl: null,
   ogImageUrl: null,

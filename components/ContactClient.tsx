@@ -2,174 +2,64 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Mail, MapPin, Phone, Send, Wrench } from "lucide-react";
 import { submitContactMessage } from "@/app/actions/contact";
 import { useToast } from "@/components/ToastProvider";
 
 type ContactData = {
-  phoneNumber?: string | null
-  showPhoneNumber?: boolean | null
-  emailAddress?: string | null
-  showEmailAddress?: boolean | null
-  address?: string | null
-  showAddress?: boolean | null
-}
+  phoneNumber?: string | null; showPhoneNumber?: boolean | null;
+  emailAddress?: string | null; showEmailAddress?: boolean | null;
+  address?: string | null; showAddress?: boolean | null;
+};
 
 export default function ContactClient({ contactData }: { contactData?: ContactData | null }) {
-  const phone = contactData?.phoneNumber || '+967 777 777 777'
-  const showPhone = contactData?.showPhoneNumber !== false
-  const email = contactData?.emailAddress || 'hello@example-store.com'
-  const showEmail = contactData?.showEmailAddress !== false
-  const address = contactData?.address || 'صنعاء، الجمهورية اليمنية'
-  const showAddress = contactData?.showAddress !== false
-
-  const [formData, setFormData, ] = useState({ name: "", phone: "", email: "", message: "" })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const { showToast } = useToast()
+  const phone = contactData?.phoneNumber || "+967 777 777 777";
+  const email = contactData?.emailAddress || "hello@example-store.com";
+  const address = contactData?.address || "صنعاء، الجمهورية اليمنية";
+  const [formData, setFormData] = useState({ name: "", phone: "", email: "", message: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { showToast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    const result = await submitContactMessage(formData)
-    setIsSubmitting(false)
-
+    e.preventDefault();
+    setIsSubmitting(true);
+    const result = await submitContactMessage(formData);
+    setIsSubmitting(false);
     if (result.success) {
-      showToast("success", result.message || "تم الإرسال بنجاح")
-      setFormData({ name: "", phone: "", email: "", message: "" })
-    } else {
-      showToast("error", result.error || "حدث خطأ ما")
-    }
-  }
+      showToast("success", result.message || "تم الإرسال بنجاح");
+      setFormData({ name: "", phone: "", email: "", message: "" });
+    } else showToast("error", result.error || "حدث خطأ ما");
+  };
 
   return (
-    <section id="contact" className="py-24 md:py-32 bg-surface">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12" dir="rtl">
-        <div className="text-center mb-20">
-          <span className="text-accent tracking-[0.3em] uppercase text-xs font-bold mb-4 block">
-            دائماً في خدمتك
-          </span>
-          <h2 className="text-4xl md:text-5xl font-black text-foreground mb-6">تواصل معنا</h2>
-          <div className="w-16 h-[2px] bg-brand mx-auto" />
+    <section id="contact" className="bg-surface py-20 md:py-28" dir="rtl">
+      <div className="mx-auto max-w-7xl px-5 md:px-10">
+        <div className="mb-12 flex flex-col gap-5 md:mb-16 md:flex-row md:items-end md:justify-between">
+          <div><span className="mb-3 block text-xs font-bold uppercase tracking-[0.28em] text-accent">نحن قريبون منك</span><h2 className="text-4xl font-black text-brand sm:text-5xl">خلّنا نساعدك تختار</h2></div>
+          <p className="max-w-md text-sm leading-7 text-foreground/60">اسألنا عن جهاز، اطلب استشارة للطاقة الشمسية، أو اترك رسالتك وسيرد عليك فريقنا بأقرب وقت.</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-          {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="space-y-12"
-          >
-            <div>
-              <h3 className="text-3xl font-black text-foreground mb-4">يسعدنا الاستماع إليك</h3>
-              <p className="text-foreground/70 font-light leading-relaxed">
-                سواء كان لديك استفسار عن منتجاتنا، أو تحتاج إلى مساعدة في اختيار ما يناسبك، أو لديك أي سؤال آخر، فإن فريق خدمة العملاء مستعد دائمًا لتقديم المساعدة.
-              </p>
-            </div>
-
-            <div className="space-y-8">
-              {showPhone && (
-                <div className="flex items-start gap-6 group">
-                  <div className="w-14 h-14 rounded-full bg-brand/5 flex items-center justify-center text-brand group-hover:bg-brand group-hover:text-surface transition-colors">
-                    <Phone className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h4 className="text-foreground font-bold mb-2">رقم الهاتف / واتساب</h4>
-                    <p className="text-foreground/60 font-light" dir="ltr">{phone}</p>
-                  </div>
-                </div>
-              )}
-
-              {showEmail && (
-                <div className="flex items-start gap-6 group">
-                  <div className="w-14 h-14 rounded-full bg-brand/5 flex items-center justify-center text-brand group-hover:bg-brand group-hover:text-surface transition-colors">
-                    <Mail className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h4 className="text-foreground font-bold mb-2">البريد الإلكتروني</h4>
-                    <p className="text-foreground/60 font-light">{email}</p>
-                  </div>
-                </div>
-              )}
-
-              {showAddress && (
-                <div className="flex items-start gap-6 group">
-                  <div className="w-14 h-14 rounded-full bg-brand/5 flex items-center justify-center text-brand group-hover:bg-brand group-hover:text-surface transition-colors">
-                    <MapPin className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h4 className="text-foreground font-bold mb-2">المقر الرئيسي</h4>
-                    <p className="text-foreground/60 font-light">{address}</p>
-                  </div>
-                </div>
-              )}
+        <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+          <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="rounded-[2rem] bg-brand p-7 text-surface sm:p-10">
+            <div className="mb-10 flex h-14 w-14 items-center justify-center rounded-2xl bg-accent text-brand"><Wrench size={25} /></div>
+            <h3 className="text-2xl font-black sm:text-3xl">استشارة قبل الشراء</h3>
+            <p className="mt-4 text-sm leading-7 text-surface/65">نساعدك في مقارنة السعة، استهلاك الكهرباء، خيارات التركيب، وما يناسب مساحة منزلك.</p>
+            <div className="mt-10 space-y-6">
+              {contactData?.showPhoneNumber !== false && <div className="flex items-start gap-4"><span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-accent"><Phone size={18} /></span><div><p className="text-xs text-surface/45">اتصل أو تواصل عبر واتساب</p><p className="mt-1 font-bold" dir="ltr">{phone}</p></div></div>}
+              {contactData?.showEmailAddress !== false && <div className="flex items-start gap-4"><span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-accent"><Mail size={18} /></span><div><p className="text-xs text-surface/45">البريد الإلكتروني</p><p className="mt-1 font-bold">{email}</p></div></div>}
+              {contactData?.showAddress !== false && <div className="flex items-start gap-4"><span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-accent"><MapPin size={18} /></span><div><p className="text-xs text-surface/45">نخدمك من</p><p className="mt-1 font-bold">{address}</p></div></div>}
             </div>
           </motion.div>
 
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="bg-white p-8 md:p-12 shadow-sm border border-black/5"
-          >
-            <form className="space-y-6" onSubmit={handleSubmit}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-foreground text-sm font-bold mb-2">الاسم الكريم</label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full bg-surface-alt border border-black/5 text-foreground px-4 py-3 focus:outline-none focus:border-brand/30 transition-colors"
-                  />
-                </div>
-                <div>
-                  <label className="block text-foreground text-sm font-bold mb-2">رقم الهاتف</label>
-                  <input
-                    type="tel"
-                    required
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full bg-surface-alt border border-black/5 text-foreground px-4 py-3 focus:outline-none focus:border-brand/30 transition-colors"
-                    dir="ltr"
-                  />
-                </div>
+          <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.08 }} className="rounded-[2rem] border border-brand/10 bg-white p-6 shadow-sm sm:p-10">
+            <form className="space-y-5" onSubmit={handleSubmit}>
+              <div className="grid gap-5 sm:grid-cols-2">
+                <div><label className="mb-2 block text-sm font-bold text-brand">الاسم</label><input type="text" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="h-12 w-full rounded-xl border border-brand/10 bg-surface px-4 text-foreground outline-none transition-colors focus:border-accent" /></div>
+                <div><label className="mb-2 block text-sm font-bold text-brand">رقم الهاتف</label><input type="tel" required value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className="h-12 w-full rounded-xl border border-brand/10 bg-surface px-4 text-foreground outline-none transition-colors focus:border-accent" dir="ltr" /></div>
               </div>
-
-              <div>
-                <label className="block text-foreground text-sm font-bold mb-2">البريد الإلكتروني</label>
-                <input
-                  type="email"
-                  required
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full bg-surface-alt border border-black/5 text-foreground px-4 py-3 focus:outline-none focus:border-brand/30 transition-colors"
-                  dir="ltr"
-                />
-              </div>
-
-              <div>
-                <label className="block text-foreground text-sm font-bold mb-2">رسالتك</label>
-                <textarea
-                  required
-                  rows={4}
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full bg-surface-alt border border-black/5 text-foreground px-4 py-3 focus:outline-none focus:border-brand/30 transition-colors resize-none"
-                ></textarea>
-              </div>
-
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-brand text-surface font-bold py-4 hover:bg-foreground transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
-              >
-                {isSubmitting ? "جاري الإرسال..." : "إرسال الرسالة"}
-              </button>
+              <div><label className="mb-2 block text-sm font-bold text-brand">البريد الإلكتروني</label><input type="email" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="h-12 w-full rounded-xl border border-brand/10 bg-surface px-4 text-foreground outline-none transition-colors focus:border-accent" dir="ltr" /></div>
+              <div><label className="mb-2 block text-sm font-bold text-brand">كيف يمكننا مساعدتك؟</label><textarea required rows={5} value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} placeholder="مثال: أبحث عن ثلاجة موفرة للطاقة أو أحتاج استشارة لنظام شمسي..." className="w-full resize-none rounded-xl border border-brand/10 bg-surface px-4 py-3 leading-7 text-foreground outline-none transition-colors focus:border-accent" /></div>
+              <button type="submit" disabled={isSubmitting} className="btn btn-primary w-full gap-2 disabled:cursor-not-allowed disabled:opacity-70">{isSubmitting ? "جاري الإرسال..." : "إرسال الاستشارة"}<Send size={17} /></button>
             </form>
           </motion.div>
         </div>

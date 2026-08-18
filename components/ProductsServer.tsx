@@ -40,6 +40,9 @@ interface ProductsServerProps {
 export default async function ProductsServer({ type, title, subtitle }: ProductsServerProps) {
   const currency = await getCurrency()
   let products: ProductRecord[] = []
+
+  // Allow the storefront shell to render cleanly in preview/build environments without a database.
+  if (!process.env.DATABASE_URL) return null
   
   try {
     const whereClause: Prisma.ProductWhereInput = { isActive: true, stock: { gt: 0 } }

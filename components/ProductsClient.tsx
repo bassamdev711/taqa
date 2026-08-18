@@ -200,7 +200,7 @@ function DetailModal({ product, onClose }: { product: ProductItem; onClose: () =
             transition={{ delay: 0.15 }}
           >
             <span className="text-accent font-bold text-[10px] tracking-[0.3em] uppercase mb-2 block">
-              {product.engName || 'Featured product'}
+              {product.engName || 'HOME APPLIANCE'}
             </span>
             <h2 className="text-2xl md:text-4xl font-black text-foreground mb-3 leading-tight">
               {product.name}
@@ -225,7 +225,7 @@ function DetailModal({ product, onClose }: { product: ProductItem; onClose: () =
 
             {hasVariants && (
               <div className="mb-6">
-                <h3 className="text-xs font-bold text-foreground/50 uppercase tracking-widest mb-3">اختر الحجم</h3>
+                <h3 className="text-xs font-bold text-foreground/50 uppercase tracking-widest mb-3">اختر السعة أو الطراز</h3>
                 <div className="flex flex-wrap gap-2">
                   {product.variants.map((v) => (
                     <button
@@ -247,19 +247,19 @@ function DetailModal({ product, onClose }: { product: ProductItem; onClose: () =
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6 bg-white p-4 border border-black/5 rounded-xl">
               {!hasVariants && product.size && (
                 <div className="flex flex-col">
-                  <span className="text-foreground/40 text-[10px] font-bold uppercase tracking-wider mb-1">الحجم</span>
+                  <span className="text-foreground/40 text-[10px] font-bold uppercase tracking-wider mb-1">السعة / المقاس</span>
                   <span className="text-foreground text-sm font-bold" dir="ltr">{product.size}</span>
                 </div>
               )}
               {product.gender && (
                 <div className="flex flex-col">
-                  <span className="text-foreground/40 text-[10px] font-bold uppercase tracking-wider mb-1">الجنس</span>
+                  <span className="text-foreground/40 text-[10px] font-bold uppercase tracking-wider mb-1">النوع</span>
                   <span className="text-foreground text-sm font-bold">{product.gender}</span>
                 </div>
               )}
               {product.color && (
                 <div className="flex flex-col">
-                  <span className="text-foreground/40 text-[10px] font-bold uppercase tracking-wider mb-1">الفئة</span>
+                  <span className="text-foreground/40 text-[10px] font-bold uppercase tracking-wider mb-1">اللون / التصنيف</span>
                   <span className="text-foreground text-sm font-bold">{product.color}</span>
                 </div>
               )}
@@ -394,17 +394,17 @@ export default function ProductsClient({
           className="text-center mb-8 md:mb-20"
         >
           <span className="text-accent tracking-[0.3em] uppercase text-xs font-bold mb-3 md:mb-4 block">
-            {subtitle || 'المجموعة الحصرية'}
+            {subtitle || 'تشكيلة منزلية مختارة'}
           </span>
           <h2 className="text-2xl md:text-5xl font-black text-foreground mb-4 md:mb-6">
-            {title || 'اكتشف منتجاتنا'}
+            {title || 'اختيارات تناسب يومك'}
           </h2>
           <div className="w-12 md:w-16 h-[2px] bg-brand mx-auto mb-5 md:mb-8" />
           <Link
             href="/products"
             className="inline-block text-xs md:text-sm text-brand border-b border-brand/30 pb-1 hover:border-brand transition-colors"
           >
-            عرض المجموعة كاملة ←
+            شاهد كل الأجهزة ←
           </Link>
         </motion.div>
 
@@ -461,7 +461,7 @@ export default function ProductsClient({
                         className="object-contain p-6 mix-blend-multiply"
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center text-accent/30 text-4xl">متجرنا</div>
+                      <div className="w-full h-full flex items-center justify-center text-accent/30 text-4xl">طاقة هوم</div>
                     )}
                   </div>
                   <div className="flex-1 flex flex-col items-center justify-center p-3 text-center bg-white z-10 border-t border-black/10">
@@ -476,7 +476,7 @@ export default function ProductsClient({
                       )}
                     </div>
                     <button className="text-[9px] font-bold uppercase tracking-wider text-brand border-b border-brand pb-0.5">
-                      اكتشف المنتج
+                      شاهد المواصفات
                     </button>
                   </div>
                 </motion.div>
@@ -532,12 +532,12 @@ export default function ProductsClient({
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center text-accent/20 text-6xl group-hover:text-accent/40 transition-colors">
-                        متجرنا
+                        طاقة هوم
                       </div>
                     )}
                     {product.compareAtPrice && (
                       <div className="absolute top-3 right-3 bg-red-600 text-white font-bold text-xs px-2.5 py-1 rounded-full shadow z-10">
-                        خصم
+                        عرض خاص
                       </div>
                     )}
                   </div>
@@ -553,7 +553,7 @@ export default function ProductsClient({
                       )}
                     </div>
                     <button className="text-xs font-bold uppercase tracking-widest text-brand border-b border-brand/30 group-hover:border-brand pb-1 transition-colors">
-                      اكتشف المنتج
+                      شاهد المواصفات
                     </button>
                   </div>
                 </motion.div>

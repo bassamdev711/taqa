@@ -207,7 +207,7 @@ export default function ProductDetailClient({ product }: { product: Product }) {
             >
               <div className="mb-4">
                 <span className="text-accent font-bold text-[10px] tracking-widest uppercase mb-2 block">
-                  {product.engName || product.brand || 'Featured product'}
+                  {product.engName || product.brand || 'HOME APPLIANCE'}
                 </span>
                 <h1 className="text-2xl md:text-4xl font-black text-foreground mb-2">{product.name}</h1>
                 <div className="flex items-center gap-3 mt-4">
@@ -231,7 +231,7 @@ export default function ProductDetailClient({ product }: { product: Product }) {
               {/* Variants Selector */}
               {hasVariants && (
                 <div className="mb-8">
-                  <h3 className="text-sm font-bold text-foreground mb-3">اختر الحجم:</h3>
+                  <h3 className="text-sm font-bold text-foreground mb-3">اختر السعة أو الطراز:</h3>
                   <div className="flex flex-wrap gap-3">
                     {product.variants!.map((variant) => (
                       <button
@@ -257,13 +257,13 @@ export default function ProductDetailClient({ product }: { product: Product }) {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 bg-white p-4 border border-black/5 rounded-lg">
                 {!hasVariants && currentSize && (
                   <div className="flex flex-col">
-                    <span className="text-foreground/50 text-[11px] font-bold mb-1">الحجم</span>
+                    <span className="text-foreground/50 text-[11px] font-bold mb-1">السعة / المقاس</span>
                     <span className="text-foreground text-sm font-bold" dir="ltr">{currentSize}</span>
                   </div>
                 )}
                 {product.gender && (
                   <div className="flex flex-col">
-                    <span className="text-foreground/50 text-[11px] font-bold mb-1">الجنس</span>
+                    <span className="text-foreground/50 text-[11px] font-bold mb-1">النوع</span>
                     <span className="text-foreground text-sm font-bold">{product.gender}</span>
                   </div>
                 )}

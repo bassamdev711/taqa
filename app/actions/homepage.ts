@@ -58,6 +58,7 @@ function sanitizeHomepageUpdate(data: unknown): HomepageUpdateInput {
 }
 
 export async function getHomepageSettings() {
+  if (!process.env.DATABASE_URL) return { success: true, data: null }
   try {
     let settings = await prisma.homepageSettings.findUnique({
       where: { id: 'singleton' },

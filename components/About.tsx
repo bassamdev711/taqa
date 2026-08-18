@@ -1,64 +1,69 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { ArrowUpLeft, CheckCircle2, Leaf, ShieldCheck, Zap } from "lucide-react";
 
 type AboutData = {
-  aboutTopTitle?: string | null
-  aboutMainTitle?: string | null
-  aboutQuote?: string | null
-  aboutDescription?: string | null
-}
+  aboutTopTitle?: string | null;
+  aboutMainTitle?: string | null;
+  aboutQuote?: string | null;
+  aboutDescription?: string | null;
+};
 
-export default function About({
-  data = {},
-  brandName = 'متجرك',
-}: {
-  data?: AboutData
-  brandName?: string
-}) {
+export default function About({ data = {} }: { data?: AboutData; brandName?: string }) {
   return (
-    <section id="about" className="relative py-24 md:py-32 bg-surface overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <div className="relative min-h-[500px] md:min-h-[600px] w-full overflow-hidden bg-brand shadow-2xl flex items-center justify-center">
-          {/* Background image subtle overlay */}
-          <div className="absolute inset-0 bg-[url('/imeg/photo_4_2026-05-13_05-39-00.jpg')] bg-cover bg-center bg-no-repeat opacity-40 mix-blend-overlay"></div>
-          
-          {/* Luxury Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-brand/90 via-brand/70 to-brand/90"></div>
-          
-          {/* Content Container */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center p-6 md:p-20 text-center z-10" dir="rtl">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1 }}
-              className="max-w-4xl"
-            >
-              <span className="text-accent text-xs uppercase tracking-[0.4em] font-bold mb-6 block">
-                {data.aboutTopTitle || `هوية ${brandName}`}
-              </span>
-              
-              <h2 className="text-4xl md:text-6xl font-black text-surface mb-8">
-                {data.aboutMainTitle || "من نحن"}
-              </h2>
-              
-              <div className="w-12 h-[1px] bg-accent mx-auto mb-10 opacity-70"></div>
-              
-              <p className="text-2xl md:text-4xl text-surface/90 font-light leading-tight mb-8">
-                {data.aboutQuote || 'نؤمن أن المنتج الجيد يجمع بين الجودة، التفاصيل، وتجربة تبقى في الذاكرة.'}
-              </p>
-              
-              <p className="text-surface/70 font-light text-base md:text-xl max-w-2xl mx-auto leading-relaxed md:leading-loose">
-                {data.aboutDescription || 'نختار منتجاتنا بعناية ونبني كل تفصيل حول احتياجات العملاء، من اكتشاف المنتج إلى استلامه بثقة وسهولة.'}
-              </p>
-            </motion.div>
+    <section id="about" className="relative overflow-hidden bg-brand py-20 text-surface md:py-28" dir="rtl">
+      <div className="absolute -left-32 top-0 h-96 w-96 rounded-full bg-green/25 blur-3xl" />
+      <div className="absolute -right-20 bottom-0 h-80 w-80 rounded-full bg-accent/15 blur-3xl" />
+      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 md:px-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+        <motion.div
+          initial={{ opacity: 0, x: 24 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="order-2 lg:order-1"
+        >
+          <div className="grid grid-cols-2 gap-3 sm:gap-5">
+            <div className="rounded-3xl border border-white/10 bg-white/10 p-5 backdrop-blur-sm sm:p-7">
+              <Zap className="mb-8 text-accent" size={26} />
+              <p className="text-3xl font-black sm:text-4xl">أذكى</p>
+              <p className="mt-2 text-sm leading-6 text-surface/60">اختيارات توازن بين الأداء والاستهلاك.</p>
+            </div>
+            <div className="mt-8 rounded-3xl border border-white/10 bg-white/10 p-5 backdrop-blur-sm sm:p-7">
+              <Leaf className="mb-8 text-solar" size={26} />
+              <p className="text-3xl font-black sm:text-4xl">أنظف</p>
+              <p className="mt-2 text-sm leading-6 text-surface/60">طاقة شمسية لأسلوب حياة أكثر استدامة.</p>
+            </div>
+            <div className="rounded-3xl border border-white/10 bg-white/10 p-5 backdrop-blur-sm sm:p-7">
+              <ShieldCheck className="mb-8 text-surface/80" size={26} />
+              <p className="text-3xl font-black sm:text-4xl">موثوق</p>
+              <p className="mt-2 text-sm leading-6 text-surface/60">جودة وضمان ودعم يرافقك بعد الشراء.</p>
+            </div>
+            <div className="mt-8 rounded-3xl border border-accent/25 bg-accent p-5 text-brand shadow-xl sm:p-7">
+              <ArrowUpLeft className="mb-8" size={26} />
+              <p className="text-3xl font-black sm:text-4xl">أسهل</p>
+              <p className="mt-2 text-sm leading-6 text-brand/70">من المقارنة حتى التوصيل والتركيب.</p>
+            </div>
           </div>
+        </motion.div>
 
-          {/* Decorative Corner Accents */}
-          <div className="absolute top-8 left-8 w-8 h-8 border-t border-l border-accent/40" />
-          <div className="absolute bottom-8 right-8 w-8 h-8 border-b border-r border-accent/40" />
-        </div>
+        <motion.div
+          initial={{ opacity: 0, x: -24 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          className="order-1 lg:order-2"
+        >
+          <span className="mb-5 block text-xs font-bold uppercase tracking-[0.28em] text-accent">{data.aboutTopTitle || "لماذا طاقة هوم؟"}</span>
+          <h2 className="max-w-2xl text-4xl font-black leading-tight sm:text-5xl lg:text-6xl">{data.aboutMainTitle || "نرتّب لك طريقاً أوضح إلى بيت أفضل."}</h2>
+          <div className="my-7 h-px w-20 bg-accent" />
+          <p className="max-w-xl text-2xl font-bold leading-relaxed text-surface/90 sm:text-3xl">{data.aboutQuote || "ليست الأجهزة مجرد منتجات؛ إنها تفاصيل تصنع راحة يومك."}</p>
+          <p className="mt-6 max-w-xl text-base leading-8 text-surface/65 sm:text-lg">{data.aboutDescription || "نختار تشكيلة عملية من الأجهزة المنزلية الكهربائية وحلول الطاقة الشمسية، ونقدّم لك مواصفات واضحة وخدمة موثوقة تساعدك على اتخاذ القرار بثقة."}</p>
+          <div className="mt-8 space-y-3 text-sm font-bold text-surface/80">
+            <p className="flex items-center gap-3"><CheckCircle2 className="text-accent" size={18} /> مقارنة واضحة للمواصفات والاستهلاك</p>
+            <p className="flex items-center gap-3"><CheckCircle2 className="text-accent" size={18} /> حلول تناسب احتياج منزلك وميزانيتك</p>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

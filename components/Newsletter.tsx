@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail } from "lucide-react";
+import { Mail, Sun } from "lucide-react";
 import { useToast } from "@/components/ToastProvider";
 import { subscribeToNewsletter } from "@/app/actions/newsletter";
 
-export default function Newsletter({ storeName = 'متجرك' }: { storeName?: string }) {
+export default function Newsletter({ storeName = "طاقة هوم" }: { storeName?: string }) {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { showToast } = useToast();
@@ -14,63 +14,30 @@ export default function Newsletter({ storeName = 'متجرك' }: { storeName?: s
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
-
     setIsSubmitting(true);
     const result = await subscribeToNewsletter(email);
     setIsSubmitting(false);
-
     if (result.success) {
       showToast("success", result.message || "تم الاشتراك بنجاح!");
       setEmail("");
-    } else {
-      showToast("error", result.error || "حدث خطأ ما");
-    }
+    } else showToast("error", result.error || "حدث خطأ ما");
   };
 
   return (
-    <section className="py-24 bg-brand relative overflow-hidden">
-      {/* Background Accents */}
-      <div className="absolute top-0 right-0 w-64 h-64 bg-accent/10 rounded-full blur-[80px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full blur-[80px] pointer-events-none" />
-
-      <div className="max-w-4xl mx-auto px-6 text-center relative z-10" dir="rtl">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-8 text-accent">
-            <Mail className="w-8 h-8" strokeWidth={1.5} />
-          </div>
-          
-          <h2 className="text-3xl md:text-5xl font-black text-surface mb-6">
-            النادي الحصري لـ {storeName}
-          </h2>
-          <p className="text-surface/70 text-lg mb-10 font-light">
-            انضم إلى قائمتنا البريدية لتكون أول من يعلم عن الجديد، والعروض، والمحتوى الذي يهمك.
-          </p>
-
-          <form className="flex flex-col md:flex-row gap-4 max-w-2xl mx-auto" onSubmit={handleSubmit}>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="البريد الإلكتروني"
-              className="flex-1 bg-white/5 border border-white/10 text-surface px-6 py-4 rounded-sm focus:outline-none focus:border-accent/50 transition-colors placeholder:text-surface/30 text-right"
-              required
-            />
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="bg-accent text-brand font-bold px-10 py-4 rounded-sm hover:bg-surface transition-colors shadow-lg disabled:opacity-70 disabled:cursor-not-allowed"
-            >
-              {isSubmitting ? "جاري الاشتراك..." : "اشتراك"}
-            </button>
+    <section className="relative overflow-hidden bg-brand py-20 text-surface md:py-24" dir="rtl">
+      <div className="absolute -right-20 top-0 h-72 w-72 rounded-full bg-accent/15 blur-3xl" />
+      <div className="absolute -left-20 bottom-0 h-72 w-72 rounded-full bg-green/25 blur-3xl" />
+      <div className="relative z-10 mx-auto max-w-4xl px-5 text-center md:px-10">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+          <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-accent text-brand shadow-lg"><Sun size={25} fill="currentColor" /></div>
+          <p className="mb-3 text-xs font-bold uppercase tracking-[0.28em] text-accent">خليك على اطلاع</p>
+          <h2 className="text-3xl font-black sm:text-5xl">عروض أذكى لبيت أكثر كفاءة</h2>
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-surface/65 sm:text-lg">اشترك لتصلك عروض الأجهزة المنزلية، ونصائح اختيار المنتج، وكل جديد في حلول الطاقة الشمسية من {storeName}.</p>
+          <form className="mx-auto mt-8 flex max-w-2xl flex-col gap-3 sm:flex-row" onSubmit={handleSubmit}>
+            <div className="relative flex-1"><Mail className="absolute right-4 top-1/2 -translate-y-1/2 text-surface/35" size={18} /><input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="بريدك الإلكتروني" className="h-14 w-full rounded-xl border border-white/10 bg-white/10 px-12 text-surface outline-none transition-colors placeholder:text-surface/35 focus:border-accent/60" required /></div>
+            <button type="submit" disabled={isSubmitting} className="btn h-14 bg-accent px-8 text-brand hover:bg-solar disabled:cursor-not-allowed disabled:opacity-70">{isSubmitting ? "جاري الاشتراك..." : "اشترك الآن"}</button>
           </form>
-          <p className="text-surface/40 text-xs mt-6 font-light">
-            نحترم خصوصيتك. لن نقوم بإرسال رسائل مزعجة.
-          </p>
+          <p className="mt-5 text-xs text-surface/35">نحترم خصوصيتك، ويمكنك إلغاء الاشتراك في أي وقت.</p>
         </motion.div>
       </div>
     </section>
