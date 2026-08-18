@@ -8,9 +8,10 @@ import FavoriteButton from './FavoriteButton';
 import { useCart } from './CartProvider';
 import { useToast } from './ToastProvider';
 import { getImageSizes } from '@/lib/image-utils';
+import { getStoreProductImage } from '@/lib/store-images';
 
 interface ProductCardProps {
-  product: { id: string; name: string; slug: string; price: number; compareAtPrice: number | null; imageUrl: string; engName?: string; brand?: string };
+  product: { id: string; name: string; slug: string; price: number; compareAtPrice: number | null; imageUrl: string; engName?: string; brand?: string; category?: string };
   currency: string;
   priority?: boolean;
 }
@@ -32,7 +33,7 @@ export default function ProductCard({ product, currency, priority = false }: Pro
         <span className="absolute left-5 top-5 z-10 text-[9px] font-black tracking-[0.24em] text-brand/35">TAQA / SELECT</span>
         <FavoriteButton product={product} className="z-20 m-4" />
         <Link href={`/products/${product.slug}`} className="absolute inset-0 z-10" aria-label={`عرض ${product.name}`} />
-        {product.imageUrl ? <Image src={product.imageUrl} alt={product.name} fill sizes={getImageSizes('card')} priority={priority} loading={priority ? undefined : 'lazy'} className="z-0 object-contain p-7 mix-blend-multiply transition-transform duration-700 ease-out group-hover:scale-105" /> : <div className="absolute inset-0 flex items-center justify-center text-brand/20"><Sparkles size={46} strokeWidth={1} /></div>}
+        {product.imageUrl ? <Image src={getStoreProductImage(product.imageUrl, product.brand, product.category)} alt={product.name} fill sizes={getImageSizes('card')} priority={priority} loading={priority ? undefined : 'lazy'} className="z-0 object-cover transition-transform duration-700 ease-out group-hover:scale-105" /> : <div className="absolute inset-0 flex items-center justify-center text-brand/20"><Sparkles size={46} strokeWidth={1} /></div>}
         {product.compareAtPrice && <span className="absolute bottom-4 right-4 z-20 rounded-full bg-brand px-3 py-1 text-[10px] font-black text-accent">عرض خاص</span>}
       </div>
 

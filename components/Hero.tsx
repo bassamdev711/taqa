@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowDownLeft, ArrowLeft, CircleCheck, Sun } from "lucide-react";
 
@@ -44,26 +45,13 @@ export default function Hero({ data = {}, brandName = "طاقة هوم", brandNa
           <p className="mt-5 flex items-center gap-2 text-xs text-surface/45"><CircleCheck size={15} className="text-green" /> مواصفات واضحة، تركيب موثوق، ودعم بعد البيع.</p>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, scale: 0.94, y: 18 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 1, delay: 0.12 }} className="order-1 relative mx-auto w-full max-w-[700px] lg:order-2">
+        <motion.div initial={{ opacity: 0, scale: 0.96, y: 18 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.12 }} className="order-1 relative mx-auto w-full max-w-[700px] lg:order-2">
           <div className="relative aspect-[1.08/1] overflow-hidden rounded-[2rem] border border-white/15 bg-[#0d2932] shadow-[0_40px_100px_-35px_rgba(0,0,0,0.8)] sm:rounded-[2.6rem]">
-            <div className="absolute left-6 top-6 z-20 text-[9px] font-black tracking-[0.25em] text-surface/40 sm:left-9 sm:top-9">{brandNameLatin}</div>
-            <div className="absolute bottom-7 right-7 z-20 max-w-[130px] text-right sm:bottom-10 sm:right-10"><span className="block text-[9px] font-black tracking-[0.22em] text-accent">THE HOME SYSTEM</span><p className="mt-2 text-xs leading-6 text-surface/55">حين تعمل التفاصيل معاً، تشعر بالفرق.</p></div>
-
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="orbit-drift absolute h-[76%] w-[76%] rounded-full border border-dashed border-accent/30"><span className="absolute -right-1 top-1/2 h-3 w-3 rounded-full bg-accent shadow-[0_0_22px_7px_rgba(239,179,74,0.35)]" /></div>
-              <div className="absolute h-[55%] w-[55%] rounded-full border border-surface/10" />
-              <div className="solar-pulse absolute h-[38%] w-[38%] rounded-full bg-accent/15 blur-2xl" />
-
-              <div className="absolute bottom-[15%] left-[16%] h-[48%] w-[20%] rounded-[1.3rem] border border-white/25 bg-gradient-to-b from-[#e6eeea] to-[#9bb7b2] shadow-[18px_20px_36px_-18px_rgba(0,0,0,0.7)] sm:left-[18%] sm:w-[19%]">
-                <div className="absolute left-1/2 top-3 h-1 w-9 -translate-x-1/2 rounded-full bg-brand/25" /><div className="absolute bottom-7 left-1/2 h-10 w-10 -translate-x-1/2 rounded-full border border-brand/20 bg-white/40" /><div className="absolute bottom-2 left-1/2 h-1 w-7 -translate-x-1/2 rounded-full bg-green" />
-              </div>
-              <div className="absolute bottom-[12%] left-1/2 h-[65%] w-[29%] -translate-x-1/2 rounded-[1.5rem] border border-white/30 bg-gradient-to-b from-[#f6f4ee] via-[#d7e7e2] to-[#769b96] shadow-[22px_26px_50px_-22px_rgba(0,0,0,0.78)] sm:w-[28%]">
-                <div className="absolute left-1/2 top-4 h-1.5 w-14 -translate-x-1/2 rounded-full bg-brand/25" /><div className="absolute inset-x-4 top-16 bottom-4 rounded-2xl border border-brand/10 bg-brand/8" /><div className="absolute bottom-10 left-1/2 flex h-16 w-16 -translate-x-1/2 items-center justify-center rounded-full border border-brand/20 bg-white/40 text-[8px] font-black tracking-[0.2em] text-brand/60">WASH</div><div className="absolute bottom-3 left-1/2 h-1 w-12 -translate-x-1/2 rounded-full bg-accent" />
-              </div>
-              <div className="absolute bottom-[18%] right-[15%] h-[38%] w-[15%] rounded-[1.1rem] border border-white/25 bg-gradient-to-b from-[#edf3ef] to-[#9ab9b1] shadow-[14px_20px_30px_-18px_rgba(0,0,0,0.7)] sm:right-[17%] sm:w-[14%]"><div className="absolute bottom-3 left-1/2 h-1 w-7 -translate-x-1/2 rounded-full bg-accent/75" /></div>
-            </div>
-
-            <div className="absolute bottom-7 left-7 right-7 z-20 flex items-end justify-between border-t border-white/15 pt-4 sm:bottom-9 sm:left-9 sm:right-9"><div><p className="text-[9px] font-black tracking-[0.2em] text-accent">ENERGY / 01</p><p className="mt-1 text-xs font-bold text-surface/72">تقنية تحسّن إيقاع يومك</p></div><span className="text-[9px] font-black tracking-[0.18em] text-surface/35">HOME SYSTEM</span></div>
+            <Image src="/products/real/kitchen-editorial.jpg" alt="مطبخ عصري بأجهزة منزلية من طاقة هوم" fill priority sizes="(max-width: 1024px) 100vw, 52vw" className="object-cover object-center transition-transform duration-1000 ease-out group-hover:scale-[1.02]" />
+            <div className="absolute inset-0 bg-gradient-to-t from-brand/90 via-brand/10 to-brand/15" />
+            <div className="absolute left-6 top-6 z-20 text-[9px] font-black tracking-[0.25em] text-surface/60 sm:left-9 sm:top-9">{brandNameLatin} / 01</div>
+            <div className="absolute bottom-7 right-7 z-20 max-w-[190px] text-right sm:bottom-10 sm:right-10"><span className="block text-[9px] font-black tracking-[0.22em] text-accent">HOME / ENERGY / LIFE</span><p className="mt-2 text-sm font-bold leading-7 text-surface">اختيارات حقيقية لبيتٍ يعمل بكفاءة.</p></div>
+            <div className="absolute bottom-7 left-7 right-7 z-20 flex items-end justify-between border-t border-white/25 pt-4 sm:bottom-9 sm:left-9 sm:right-9"><div><p className="text-[9px] font-black tracking-[0.2em] text-accent">REAL HOME EDIT</p><p className="mt-1 text-xs font-bold text-surface/85">أجهزة منزلية بتفاصيل تليق باليوم.</p></div><span className="text-[9px] font-black tracking-[0.18em] text-surface/55">TAQA HOME</span></div>
           </div>
         </motion.div>
       </div>

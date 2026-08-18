@@ -2,6 +2,7 @@ import prisma from '@/lib/prisma'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowUpLeft, Home, Snowflake, Sun, Zap } from 'lucide-react'
+import { getStoreCollectionImage } from '@/lib/store-images'
 
 type CollectionCard = { id: string; name: string; slug: string; description: string | null; imageUrl: string | null }
 
@@ -41,8 +42,8 @@ export default async function CollectionsSection({ brandName = 'طاقة هوم'
             const Icon = visual.icon
             return (
               <Link key={collection.id} href={`/products?collection=${collection.slug}`} className="group relative min-h-[20rem] overflow-hidden bg-brand p-5 transition-colors duration-500 hover:bg-[#153d47] sm:p-7">
-                {collection.imageUrl ? <Image src={collection.imageUrl} alt={collection.name} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw" className="object-cover opacity-60 transition-transform duration-700 group-hover:scale-105" /> : <div className={`absolute inset-5 rounded-[1.4rem] bg-gradient-to-br ${visual.accent} opacity-90 transition-transform duration-700 group-hover:scale-[1.03]`}><div className="absolute right-5 top-5 text-[9px] font-black tracking-[0.28em] text-brand/35">TAQA / {visual.code}</div><Icon className="absolute bottom-7 left-7 text-brand/70" size={52} strokeWidth={1.1} /></div>}
-                <div className="absolute inset-0 bg-gradient-to-t from-brand via-transparent to-transparent opacity-80" />
+                {getStoreCollectionImage(collection.imageUrl, collection.slug) ? <Image src={getStoreCollectionImage(collection.imageUrl, collection.slug)} alt={collection.name} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw" className="object-cover opacity-80 transition-transform duration-700 group-hover:scale-105" /> : <div className={`absolute inset-5 rounded-[1.4rem] bg-gradient-to-br ${visual.accent} opacity-90 transition-transform duration-700 group-hover:scale-[1.03]`}><div className="absolute right-5 top-5 text-[9px] font-black tracking-[0.28em] text-brand/35">TAQA / {visual.code}</div><Icon className="absolute bottom-7 left-7 text-brand/70" size={52} strokeWidth={1.1} /></div>}
+                <div className="absolute inset-0 bg-gradient-to-t from-brand/90 via-brand/20 to-transparent opacity-90" />
                 <div className="relative z-10 flex h-full flex-col justify-between"><span className="text-[10px] font-black tracking-[0.28em] text-surface/35">{visual.code}</span><div><h3 className="text-2xl font-black text-surface">{collection.name}</h3><p className="mt-3 max-w-[15rem] text-sm leading-6 text-surface/55">{collection.description}</p><span className="mt-5 inline-flex items-center gap-2 text-xs font-black text-accent opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">اكتشف القسم <ArrowUpLeft size={15} /></span></div></div>
               </Link>
             )
