@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && next build",
-    "db:push": "prisma db push",
-    "db:seed:demo": "SEED_DEMO_DATA=true prisma db seed",
+    "build": "sh scripts/prisma-with-direct-url.sh db push --skip-generate && prisma generate && next build",
+    "db:push": "sh scripts/prisma-with-direct-url.sh db push",
+    "db:seed:demo": "SEED_DEMO_DATA=true sh scripts/prisma-with-direct-url.sh db seed",
+    "db:bootstrap:demo": "sh scripts/prisma-with-direct-url.sh db push && SEED_DEMO_DATA=true sh scripts/prisma-with-direct-url.sh db seed",
     "start": "next start",
     "lint": "eslint"
   },

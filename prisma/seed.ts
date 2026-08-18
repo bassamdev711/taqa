@@ -134,18 +134,70 @@ function makeSlug(categorySlug: string, index: number) {
 async function main() {
   console.log('Starting TAQA HOME demo catalog seed...')
 
+  const storeSettingsData = {
+    storeName: process.env.STORE_NAME?.trim() || 'طاقة هوم',
+    storeNameLatin: process.env.STORE_NAME_LATIN?.trim() || 'TAQA HOME',
+    storeTagline: process.env.STORE_TAGLINE?.trim() || 'أجهزة منزلية أذكى، وطاقة شمسية لبيت أكثر كفاءة.',
+    storeDescription: process.env.STORE_DESCRIPTION?.trim() || 'اكتشف الغسالات والثلاجات وأجهزة المطبخ وحلول الطاقة الشمسية، مع مواصفات واضحة وخدمة موثوقة.',
+    locale: process.env.STORE_LOCALE?.trim() || 'ar',
+    currencyCode: process.env.STORE_CURRENCY?.trim().toUpperCase() || 'USD',
+    storeUrl: process.env.STORE_URL?.trim() || null,
+  }
+
   await prisma.storeSettings.upsert({
     where: { id: 'singleton' },
-    update: {},
+    update: storeSettingsData,
+    create: { id: 'singleton', ...storeSettingsData },
+  })
+
+  await prisma.homepageSettings.upsert({
+    where: { id: 'singleton' },
+    update: {
+      heroTitle: 'طاقة هوم',
+      heroSubtitle: 'تقنيةٌ تُحسن تفاصيل البيت.',
+      heroDescription: 'أجهزة منزلية كهربائية وحلول طاقة شمسية مختارة بعناية لبيت أكثر راحة وكفاءة.',
+      heroPrimaryButton: 'اكتشف المنتجات',
+      heroSecondaryButton: 'اعرف المزيد',
+      aboutTopTitle: 'فلسفة طاقة هوم',
+      aboutMainTitle: 'اختيارات أذكى لبيتٍ أكثر كفاءة.',
+      aboutQuote: 'نختار التقنية التي تخدم يومك، لا التي تزدحم به.',
+      aboutDescription: 'نقرّب لك الغسالات والثلاجات وأجهزة المطبخ وحلول الطاقة الشمسية بمواصفات واضحة وتصميم يليق بالبيت العصري.',
+      expTopTitle: 'تجربة طاقة هوم',
+      expMainTitle: 'وضوحٌ قبل الشراء، وثقةٌ بعده.',
+      expBox1Title: 'مواصفات واضحة',
+      expBox1Desc: 'نرتب التفاصيل الأساسية والسعات والخيارات لتقارن بثقة وهدوء.',
+      expBox2Title: 'حلول متكاملة',
+      expBox2Desc: 'من الجهاز المنزلي إلى منظومة الطاقة الشمسية، نساعدك على اختيار ما يناسب مساحتك.',
+      statsJson: JSON.stringify([
+        { value: '10', label: 'تصنيفات منزلية' },
+        { value: '100', label: 'منتجاً مختاراً' },
+        { value: '01', label: 'هوية واضحة' },
+        { value: '24/7', label: 'راحة يومية' },
+      ]),
+    },
     create: {
       id: 'singleton',
-      storeName: process.env.STORE_NAME?.trim() || 'طاقة هوم',
-      storeNameLatin: process.env.STORE_NAME_LATIN?.trim() || 'TAQA HOME',
-      storeTagline: process.env.STORE_TAGLINE?.trim() || 'أجهزة منزلية أذكى، وطاقة شمسية لبيت أكثر كفاءة.',
-      storeDescription: process.env.STORE_DESCRIPTION?.trim() || 'اكتشف الغسالات والثلاجات وأجهزة المطبخ وحلول الطاقة الشمسية، مع مواصفات واضحة وخدمة موثوقة.',
-      locale: process.env.STORE_LOCALE?.trim() || 'ar',
-      currencyCode: process.env.STORE_CURRENCY?.trim().toUpperCase() || 'USD',
-      storeUrl: process.env.STORE_URL?.trim() || null,
+      heroTitle: 'طاقة هوم',
+      heroSubtitle: 'تقنيةٌ تُحسن تفاصيل البيت.',
+      heroDescription: 'أجهزة منزلية كهربائية وحلول طاقة شمسية مختارة بعناية لبيت أكثر راحة وكفاءة.',
+      heroPrimaryButton: 'اكتشف المنتجات',
+      heroSecondaryButton: 'اعرف المزيد',
+      aboutTopTitle: 'فلسفة طاقة هوم',
+      aboutMainTitle: 'اختيارات أذكى لبيتٍ أكثر كفاءة.',
+      aboutQuote: 'نختار التقنية التي تخدم يومك، لا التي تزدحم به.',
+      aboutDescription: 'نقرّب لك الغسالات والثلاجات وأجهزة المطبخ وحلول الطاقة الشمسية بمواصفات واضحة وتصميم يليق بالبيت العصري.',
+      expTopTitle: 'تجربة طاقة هوم',
+      expMainTitle: 'وضوحٌ قبل الشراء، وثقةٌ بعده.',
+      expBox1Title: 'مواصفات واضحة',
+      expBox1Desc: 'نرتب التفاصيل الأساسية والسعات والخيارات لتقارن بثقة وهدوء.',
+      expBox2Title: 'حلول متكاملة',
+      expBox2Desc: 'من الجهاز المنزلي إلى منظومة الطاقة الشمسية، نساعدك على اختيار ما يناسب مساحتك.',
+      statsJson: JSON.stringify([
+        { value: '10', label: 'تصنيفات منزلية' },
+        { value: '100', label: 'منتجاً مختاراً' },
+        { value: '01', label: 'هوية واضحة' },
+        { value: '24/7', label: 'راحة يومية' },
+      ]),
     },
   })
 

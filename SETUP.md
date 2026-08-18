@@ -89,20 +89,29 @@ git commit --allow-empty -m "Trigger redeploy" && git push
 
 ## 🗄️ قاعدة البيانات (Prisma + Neon)
 
-### تطبيق تغييرات الـ Schema محلياً
+### تطبيق تغييرات الـ Schema محلياً أو على Vercel
+يستخدم المشروع اتصال `DIRECT_URL` عند توفره، ثم يعود إلى `DATABASE_URL`. على Vercel يجب ضبط `DATABASE_URL`، ويفضل إضافة `DIRECT_URL` إذا كان مزود PostgreSQL يميز بين اتصال pooled واتصال مباشر.
+
+لتطبيق الجداول على قاعدة فارغة أو محدثة:
 ```bash
-npx prisma db push
-npx prisma generate
+npm run db:push
 ```
 
-### ملاحظة مهمة
-أمر البناء في `package.json` يتضمن `prisma db push` تلقائياً:
-```json
-"build": "prisma db push --accept-data-loss && prisma generate && next build"
+لإنشاء كتالوج TAQA HOME التجريبي بعد تطبيق الـ schema:
+```bash
+npm run db:seed:demo
 ```
-هذا يضمن تطبيق تغييرات قاعدة البيانات تلقائياً مع كل deployment على Vercel.
 
-> ⚠️ `--accept-data-loss` آمن فقط عند إضافة أعمدة جديدة. لا تستخدمه عند حذف أعمدة تحتوي بيانات.
+ولتنفيذ الخطوتين معاً مرة واحدة:
+```bash
+npm run db:bootstrap:demo
+```
+
+أمر `npm run build` يطبق `prisma db push --skip-generate` تلقائياً عندما تكون متغيرات الاتصال موجودة، ثم يشغّل `prisma generate` و`next build`. إذا لم توجد متغيرات قاعدة البيانات، يتجاوز الغلاف خطوة قاعدة البيانات حتى يمكن إجراء build محلي للواجهة فقط.
+
+> لا نستخدم `--accept-data-loss` تلقائياً؛ ذلك يحمي بيانات المتجر من تغييرات مدمرة غير مقصودة. يجب تشغيله يدوياً فقط بعد مراجعة Prisma للتغييرات.
+
+> مهم: `db:push` يهيئ قاعدة البيانات المتصلة بالمشروع. نفّذ `db:seed:demo` مرة واحدة فقط على قاعدة المتجر التي تريد تعبئتها بالبيانات التجريبية.
 
 ---
 
