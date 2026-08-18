@@ -64,6 +64,16 @@ body::before {
   mix-blend-mode: multiply;
 }
 
+/* لوحة الإدارة عملية وواضحة؛ لا تحتاج طبقة الحبيبات الزخرفية الخاصة بالواجهة العامة. */
+body.is-admin {
+  background: #f6f2e9;
+  background-image: none;
+}
+
+body.is-admin::before {
+  display: none;
+}
+
 ::selection { background: var(--color-accent); color: var(--color-brand); }
 
 .text-gradient {
