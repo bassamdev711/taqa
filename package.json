@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "sh scripts/prisma-with-direct-url.sh db push --skip-generate && prisma generate && next build",
+    "build": "sh scripts/prepare-vercel-build.sh && prisma generate && next build",
     "db:push": "sh scripts/prisma-with-direct-url.sh db push",
     "db:seed:demo": "SEED_DEMO_DATA=true sh scripts/prisma-with-direct-url.sh db seed",
     "db:bootstrap:demo": "sh scripts/prisma-with-direct-url.sh db push && SEED_DEMO_DATA=true sh scripts/prisma-with-direct-url.sh db seed",

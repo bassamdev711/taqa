@@ -107,11 +107,17 @@ npm run db:seed:demo
 npm run db:bootstrap:demo
 ```
 
-أمر `npm run build` يطبق `prisma db push --skip-generate` تلقائياً عندما تكون متغيرات الاتصال موجودة، ثم يشغّل `prisma generate` و`next build`. إذا لم توجد متغيرات قاعدة البيانات، يتجاوز الغلاف خطوة قاعدة البيانات حتى يمكن إجراء build محلي للواجهة فقط.
+أمر `npm run build` يشغّل `scripts/prepare-vercel-build.sh` قبل `prisma generate` و`next build`. يطبق هذا السكربت schema تلقائياً عندما تكون متغيرات الاتصال موجودة، ثم يزرع الكتالوج التجريبي فقط إذا كان متغير `SEED_DEMO_DATA=true` مفعلاً في Vercel.
+
+لذلك، إذا كنت تعمل من لوحة Vercel ولا تملك جهازاً محلياً، أضف من **Project → Settings → Environment Variables**:
+```text
+SEED_DEMO_DATA=true
+```
+ثم أعد النشر. يجب أن تكون `DATABASE_URL` موجودة مسبقاً، ويفضل إضافة `DIRECT_URL` إذا كان مزود PostgreSQL يوفر اتصالاً مباشراً.
 
 > لا نستخدم `--accept-data-loss` تلقائياً؛ ذلك يحمي بيانات المتجر من تغييرات مدمرة غير مقصودة. يجب تشغيله يدوياً فقط بعد مراجعة Prisma للتغييرات.
 
-> مهم: `db:push` يهيئ قاعدة البيانات المتصلة بالمشروع. نفّذ `db:seed:demo` مرة واحدة فقط على قاعدة المتجر التي تريد تعبئتها بالبيانات التجريبية.
+> مهم: اترك `SEED_DEMO_DATA` مفعلاً فقط أثناء تهيئة الكتالوج التجريبي. بعد نجاح deployment الأول، عطّله من Vercel ثم أعد النشر، حتى لا يعاد تحديث البيانات التجريبية في كل build لاحق.
 
 ---
 
