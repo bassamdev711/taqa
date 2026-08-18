@@ -74,6 +74,14 @@ body.is-admin::before {
   display: none;
 }
 
+body.is-admin #announcement-bar {
+  display: none;
+}
+
+body.is-admin {
+  padding-bottom: 0 !important;
+}
+
 ::selection { background: var(--color-accent); color: var(--color-brand); }
 
 .text-gradient {
