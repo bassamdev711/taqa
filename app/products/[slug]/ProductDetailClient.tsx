@@ -130,7 +130,7 @@ export default function ProductDetailClient({ product }: { product: Product }) {
 
   return (
     <>
-      <div className="relative bg-surface text-foreground pb-16" dir="rtl">
+      <div className="relative bg-surface pb-20 text-foreground" dir="rtl">
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-10 items-start">
           
           {/* ======= Left: Image Gallery ======= */}
@@ -138,7 +138,7 @@ export default function ProductDetailClient({ product }: { product: Product }) {
             
             {/* Main Image Stage */}
             <div 
-              className="w-full mx-auto aspect-square max-h-[400px] md:max-h-[550px] bg-white relative overflow-hidden border border-black/5 flex items-center justify-center cursor-zoom-in group rounded-lg"
+              className="group relative mx-auto flex aspect-square max-h-[400px] w-full cursor-zoom-in items-center justify-center overflow-hidden rounded-[1.75rem] border border-brand/10 bg-surface-alt md:max-h-[550px]"
               onClick={() => setLightboxOpen(true)}
             >
               <AnimatePresence mode="wait">
@@ -156,14 +156,14 @@ export default function ProductDetailClient({ product }: { product: Product }) {
                       alt={product.name}
                       fill
                       priority
-                      className="object-cover mix-blend-multiply transition-transform duration-500 group-hover:scale-105"
+                      className="object-contain p-8 mix-blend-multiply transition-transform duration-700 group-hover:scale-105"
                       sizes={getImageSizes('detail')}
                     />
                   ) : (
                     <Sparkles className="w-12 h-12 text-accent/20" />
                   )}
                   {hasDiscount && (
-                    <div className="absolute top-4 right-4 bg-red-600 text-white font-bold text-sm px-3 py-1 rounded-full shadow-sm z-10">
+                    <div className="absolute right-4 top-4 z-10 rounded-full bg-brand px-3 py-1 text-sm font-black text-accent shadow-sm">
                       وفر {discountPercentage}%
                     </div>
                   )}
@@ -254,7 +254,7 @@ export default function ProductDetailClient({ product }: { product: Product }) {
               )}
 
               {/* Specs Grid (Compact) */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 bg-white p-4 border border-black/5 rounded-lg">
+              <div className="mb-8 grid grid-cols-2 gap-3 rounded-[1.5rem] border border-brand/10 bg-white p-5 md:grid-cols-4">
                 {!hasVariants && currentSize && (
                   <div className="flex flex-col">
                     <span className="text-foreground/50 text-[11px] font-bold mb-1">السعة / المقاس</span>
@@ -303,7 +303,7 @@ export default function ProductDetailClient({ product }: { product: Product }) {
                   <button 
                     onClick={handleAddToCartClick}
                     disabled={currentStock <= 0}
-                    className="btn btn-outline flex-1 h-14 gap-2 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="btn btn-outline h-14 flex-1 gap-2 rounded-xl disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     <ShoppingBag size={20} />
                     أضف إلى السلة
@@ -313,7 +313,7 @@ export default function ProductDetailClient({ product }: { product: Product }) {
                 <button 
                   onClick={handleBuyNow}
                   disabled={currentStock <= 0}
-                  className="btn btn-primary w-full h-14 text-lg gap-2 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="btn btn-primary h-14 w-full gap-2 rounded-xl text-lg disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   <CreditCard size={20} />
                   اشترِ الآن

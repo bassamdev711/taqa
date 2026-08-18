@@ -385,26 +385,26 @@ export default function ProductsClient({
   return (
     <section
       id={type || 'products'}
-      className={`py-10 md:py-24 px-4 md:px-6 ${type === 'offers' ? 'bg-surface-alt' : 'bg-surface'} relative overflow-hidden`}
+      className={`relative overflow-hidden border-t border-brand/10 px-5 py-16 md:px-10 md:py-28 ${type === 'offers' ? 'bg-surface-alt' : 'bg-surface'}`}
     >
       <div className="max-w-7xl mx-auto" dir="rtl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          className="text-center mb-8 md:mb-20"
+          className="mb-10 flex flex-col items-center text-center md:mb-16"
         >
-          <span className="text-accent tracking-[0.3em] uppercase text-xs font-bold mb-3 md:mb-4 block">
+          <span className="eyebrow mb-4 block text-accent">
             {subtitle || 'تشكيلة منزلية مختارة'}
           </span>
-          <h2 className="text-2xl md:text-5xl font-black text-foreground mb-4 md:mb-6">
+          <h2 className="max-w-3xl text-3xl font-black leading-tight text-brand sm:text-5xl">
             {title || 'اختيارات تناسب يومك'}
           </h2>
-          <div className="w-12 md:w-16 h-[2px] bg-brand mx-auto mb-5 md:mb-8" />
+          <div className="my-6 h-px w-16 bg-accent" />
           <Link
             href="/products"
-            className="inline-block text-xs md:text-sm text-brand border-b border-brand/30 pb-1 hover:border-brand transition-colors"
+            className="inline-flex items-center gap-2 text-xs font-black text-brand transition-colors hover:text-green"
           >
-            شاهد كل الأجهزة ←
+            فتح الكتالوج ←
           </Link>
         </motion.div>
 
@@ -420,9 +420,9 @@ export default function ProductsClient({
                 <motion.div
                   key={`mobile-${product.id}`}
                   onClick={() => setSelectedId(product.id)}
-                  className="relative min-w-[58vw] h-[290px] snap-center bg-white shadow-md hover:shadow-xl border border-black/20 rounded-2xl overflow-hidden flex flex-col cursor-pointer group"
+                  className="group relative flex h-[310px] min-w-[68vw] snap-center cursor-pointer flex-col overflow-hidden rounded-[1.5rem] border border-brand/10 bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl"
                 >
-                  <div className="relative w-full h-[58%] bg-surface/50 p-4 flex items-center justify-center">
+                  <div className="relative flex h-[58%] w-full items-center justify-center bg-surface-alt p-4">
                     <button 
                       className={`absolute top-4 right-4 z-20 transition-transform hover:scale-110 active:scale-95 drop-shadow-md ${
                         isFavorite(product.id) ? 'text-red-500' : 'text-white hover:text-red-500'
@@ -489,10 +489,10 @@ export default function ProductsClient({
                 <motion.div
                   key={`desktop-${product.id}`}
                   onClick={() => setSelectedId(product.id)}
-                  className="relative h-[550px] bg-white cursor-pointer group shadow-md hover:shadow-2xl transition-all duration-500 border border-black/20 hover:border-brand/40 rounded-3xl flex flex-col overflow-hidden"
+                  className="group relative flex min-h-[560px] cursor-pointer flex-col overflow-hidden rounded-[1.75rem] border border-brand/10 bg-white shadow-sm transition-all duration-500 hover:-translate-y-1 hover:border-accent/45 hover:shadow-2xl"
                   whileHover={{ y: -5 }}
                 >
-                  <div className="relative w-full h-[65%] bg-surface/50 transition-colors duration-500 group-hover:bg-surface-alt flex items-center justify-center p-8">
+                  <div className="relative flex h-[64%] w-full items-center justify-center bg-surface-alt p-8 transition-colors duration-500 group-hover:bg-mist">
                     <button 
                       className={`absolute top-4 right-4 z-20 transition-all duration-300 drop-shadow-md hover:scale-110 active:scale-95 ${
                         isFavorite(product.id) ? 'text-red-500 opacity-100' : 'text-white hover:text-red-500 opacity-0 group-hover:opacity-100'

@@ -16,6 +16,15 @@ function getBaseUrl(): string {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = getBaseUrl()
 
+  if (!process.env.DATABASE_URL) {
+    return ['', '/products', '/contact'].map((route) => ({
+      url: `${baseUrl}${route}`,
+      lastModified: new Date(),
+      changeFrequency: 'daily' as const,
+      priority: route === '' ? 1 : 0.8,
+    }))
+  }
+
   try {
     const products = await prisma.product.findMany({
       where: { isActive: true },

@@ -3,23 +3,14 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ShoppingBag } from 'lucide-react';
+import { ArrowUpLeft, ShoppingBag, Sparkles } from 'lucide-react';
 import FavoriteButton from './FavoriteButton';
 import { useCart } from './CartProvider';
 import { useToast } from './ToastProvider';
 import { getImageSizes } from '@/lib/image-utils';
 
 interface ProductCardProps {
-  product: {
-    id: string;
-    name: string;
-    slug: string;
-    price: number;
-    compareAtPrice: number | null;
-    imageUrl: string;
-    engName?: string;
-    brand?: string;
-  };
+  product: { id: string; name: string; slug: string; price: number; compareAtPrice: number | null; imageUrl: string; engName?: string; brand?: string };
   currency: string;
   priority?: boolean;
 }
@@ -27,71 +18,29 @@ interface ProductCardProps {
 export default function ProductCard({ product, currency, priority = false }: ProductCardProps) {
   const { addToCart } = useCart();
   const { showToast } = useToast();
-
   const handleAddToCart = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    addToCart({
-      id: product.id,
-      name: product.name,
-      slug: product.slug,
-      price: product.price,
-      imageUrl: product.imageUrl,
-      quantity: 1,
-      maxStock: 99, // default max stock if not provided
-    });
+    e.preventDefault(); e.stopPropagation();
+    addToCart({ id: product.id, name: product.name, slug: product.slug, price: product.price, imageUrl: product.imageUrl, quantity: 1, maxStock: 99 });
     showToast('success', 'تمت الإضافة إلى السلة بنجاح');
   };
 
   return (
-    <div className="relative bg-white cursor-pointer group shadow-sm hover:shadow-xl transition-all duration-500 border border-black/10 rounded-xl md:rounded-2xl flex flex-col overflow-hidden h-auto md:h-[500px]">
-      <div className="relative w-full h-[180px] md:h-[60%] bg-surface/50 transition-colors duration-500 group-hover:bg-surface flex items-center justify-center">
-        <FavoriteButton 
-          product={product}
-          className="z-20 m-4 md:m-6"
-        />
-        <Link href={`/products/${product.slug}`} className="absolute inset-0 z-10" />
-        
-        {product.imageUrl ? (
-          <Image
-            src={product.imageUrl}
-            alt={product.name}
-            fill
-            sizes={getImageSizes('card')}
-            priority={priority}
-            loading={priority ? undefined : 'lazy'}
-            className="object-cover mix-blend-multiply transition-transform duration-700 ease-out z-0 hover:scale-105"
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center text-accent/20 text-6xl z-0">
-            متجرنا
-          </div>
-        )}
+    <article className="group relative flex h-full min-h-[27rem] flex-col overflow-hidden rounded-[1.5rem] border border-brand/10 bg-white transition-all duration-500 hover:-translate-y-1 hover:border-accent/45 hover:shadow-[0_25px_65px_-28px_rgba(11,35,43,0.5)]">
+      <div className="relative h-[17rem] overflow-hidden bg-surface-alt">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_65%_32%,rgba(239,179,74,0.24),transparent_28%),linear-gradient(135deg,#e3ede8,#f5f1e6)]" />
+        <div className="absolute -right-12 -top-12 h-40 w-40 rounded-full border border-brand/10" />
+        <span className="absolute left-5 top-5 z-10 text-[9px] font-black tracking-[0.24em] text-brand/35">TAQA / SELECT</span>
+        <FavoriteButton product={product} className="z-20 m-4" />
+        <Link href={`/products/${product.slug}`} className="absolute inset-0 z-10" aria-label={`عرض ${product.name}`} />
+        {product.imageUrl ? <Image src={product.imageUrl} alt={product.name} fill sizes={getImageSizes('card')} priority={priority} loading={priority ? undefined : 'lazy'} className="z-0 object-contain p-7 mix-blend-multiply transition-transform duration-700 ease-out group-hover:scale-105" /> : <div className="absolute inset-0 flex items-center justify-center text-brand/20"><Sparkles size={46} strokeWidth={1} /></div>}
+        {product.compareAtPrice && <span className="absolute bottom-4 right-4 z-20 rounded-full bg-brand px-3 py-1 text-[10px] font-black text-accent">عرض خاص</span>}
       </div>
-      
-      <div className="flex-1 flex flex-col items-center justify-center p-3 md:p-6 text-center bg-white z-20 border-t border-black/5 relative">
-        <h3 className="text-base md:text-2xl font-black text-foreground mb-0.5 md:mb-1">{product.name}</h3>
-        <p className="text-accent text-[9px] md:text-[10px] tracking-[0.2em] uppercase mb-2 md:mb-4">
-          {product.engName || product.brand || 'HOME APPLIANCE'}
-        </p>
-        
-        <div className="flex items-center gap-1.5 md:gap-2 mb-3 md:mb-6">
-          <p className="text-brand font-bold text-sm md:text-lg">{Number(product.price).toLocaleString('ar-SA')} {currency}</p>
-          {product.compareAtPrice && (
-            <p className="text-foreground/40 line-through text-[10px] md:text-sm">
-              {Number(product.compareAtPrice).toLocaleString('ar-SA')}
-            </p>
-          )}
-        </div>
-        
-        <button 
-          onClick={handleAddToCart}
-          className="w-full max-w-full md:max-w-[200px] h-8 md:h-10 border border-brand text-brand hover:bg-brand hover:text-surface transition-colors rounded-lg md:rounded-xl flex items-center justify-center gap-1.5 font-bold text-xs"
-        >
-          <ShoppingBag size={13} className="md:w-4 md:h-4" />
-          أضف للسلة
-        </button>
+
+      <div className="relative z-20 flex flex-1 flex-col justify-between bg-white p-5 text-right sm:p-6" dir="rtl">
+        <div><div className="mb-3 flex items-center justify-between gap-3"><span className="text-[9px] font-black uppercase tracking-[0.18em] text-green">{product.engName || product.brand || 'HOME APPLIANCE'}</span><span className="h-1.5 w-1.5 rounded-full bg-accent" /></div><h3 className="text-xl font-black leading-tight text-brand">{product.name}</h3></div>
+        <div className="mt-6 flex items-end justify-between gap-3"><div><p className="text-[9px] font-bold text-foreground/40">السعر الحالي</p><p className="mt-1 text-lg font-black text-brand">{Number(product.price).toLocaleString('ar-SA')} <span className="text-xs text-foreground/45">{currency}</span></p>{product.compareAtPrice && <p className="text-xs text-foreground/35 line-through">{Number(product.compareAtPrice).toLocaleString('ar-SA')} {currency}</p>}</div><button onClick={handleAddToCart} className="relative z-30 flex h-11 w-11 items-center justify-center rounded-xl bg-brand text-surface transition-all hover:bg-accent hover:text-brand" aria-label="أضف للسلة"><ShoppingBag size={17} /></button></div>
+        <Link href={`/products/${product.slug}`} className="mt-5 flex items-center justify-between border-t border-brand/10 pt-4 text-xs font-black text-brand transition-colors hover:text-green"><span>مشاهدة المواصفات</span><ArrowUpLeft size={16} /></Link>
       </div>
-    </div>
+    </article>
   );
 }

@@ -16,7 +16,7 @@ type Review = {
 export default function TestimonialsClient({ 
   reviews, 
   title = "آراء عملائنا", 
-  subtitle = "تجربة لا تُنسى",
+  subtitle = "اختيارات يطمئن لها البيت",
   productId 
 }: { 
   reviews: Review[], 
@@ -75,20 +75,20 @@ export default function TestimonialsClient({
 
   const visibleReviews = localReviews.slice(currentIndex, currentIndex + 3)
   return (
-    <section className="py-24 md:py-32 bg-surface-alt overflow-hidden">
+    <section className="overflow-hidden border-t border-brand/10 bg-surface-alt py-20 md:py-28">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 relative" dir="rtl">
-        <div className="flex flex-col md:flex-row justify-between items-center mb-16 gap-6">
+        <div className="mb-12 flex flex-col items-center justify-between gap-6 md:mb-16 md:flex-row">
           <div className="text-center md:text-right">
-            <span className="text-accent tracking-[0.3em] uppercase text-xs font-bold mb-4 block">
+            <span className="eyebrow mb-4 block text-accent">
               {title}
             </span>
-            <h2 className="text-2xl md:text-5xl font-black text-foreground mb-4">{subtitle}</h2>
-            <div className="w-16 h-[2px] bg-brand md:ml-auto md:mr-0 mx-auto" />
+            <h2 className="text-3xl font-black text-brand sm:text-5xl">{subtitle}</h2>
+            <div className="mt-5 h-px w-16 bg-accent md:mr-0" />
           </div>
           
           <button 
             onClick={() => setShowForm(!showForm)}
-            className="bg-brand text-white text-sm md:text-base font-bold py-2 md:py-3 px-4 md:px-8 rounded-none hover:bg-foreground transition-colors flex items-center gap-2"
+            className="btn btn-primary gap-2"
           >
             <PenLine size={18} />
             {showForm ? 'إخفاء النموذج' : 'شاركنا مراجعتك'}
