@@ -1,9 +1,7 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { ArrowDownLeft, ArrowLeft, CircleCheck, Grid2X2, Sun, Zap } from "lucide-react";
-const SplineGlassScene = dynamic(() => import("./SplineGlassScene"), { ssr: false });
 
 type HeroData = {
   heroTitle?: string | null;
@@ -50,7 +48,6 @@ export default function Hero({ data = {}, brandName = "طاقة هوم", brandNa
         <motion.div initial={{ opacity: 0, scale: 0.94, y: 18 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 1, delay: 0.12 }} className="order-1 relative mx-auto w-full max-w-[700px] lg:order-2">
           <div className="absolute -right-2 top-3 z-30 flex items-center gap-2 rounded-xl border border-white/15 bg-brand/70 px-3 py-2 text-[10px] text-surface/70 backdrop-blur-xl sm:-right-6 sm:top-8"><span className="h-2 w-2 rounded-full bg-accent shadow-[0_0_0_5px_rgba(239,179,74,0.15)]" /> النظام يعمل بكفاءة</div>
           <div className="relative aspect-[1.08/1] overflow-hidden rounded-[2rem] border border-white/15 bg-[#0d2932] shadow-[0_40px_100px_-35px_rgba(0,0,0,0.8)] sm:rounded-[2.6rem]">
-            <SplineGlassScene />
             <div className="absolute left-6 top-6 z-20 flex items-center gap-2 text-[9px] font-black tracking-[0.25em] text-surface/40 sm:left-9 sm:top-9"><Grid2X2 size={13} /> {brandNameLatin}</div>
             <div className="absolute bottom-7 right-7 z-20 max-w-[130px] text-right sm:bottom-10 sm:right-10"><span className="block text-[9px] font-black tracking-[0.22em] text-accent">THE HOME SYSTEM</span><p className="mt-2 text-xs leading-6 text-surface/55">حين تعمل التفاصيل معاً، تشعر بالفرق.</p></div>
 
