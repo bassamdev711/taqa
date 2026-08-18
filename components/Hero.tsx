@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowDownLeft, ArrowLeft, CircleCheck, Sun } from "lucide-react";
 
@@ -12,8 +13,6 @@ type HeroData = {
 };
 
 export default function Hero({ data = {}, brandName = "طاقة هوم", brandNameLatin = "TAQA HOME" }: { data?: HeroData; brandName?: string; brandNameLatin?: string }) {
-  const scrollToProducts = () => document.getElementById("products")?.scrollIntoView({ behavior: "smooth" });
-
   return (
     <section id="hero" className="relative min-h-[100dvh] overflow-hidden bg-brand text-surface" dir="rtl">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_32%,rgba(239,179,74,0.18),transparent_24%),radial-gradient(circle_at_18%_82%,rgba(111,149,128,0.18),transparent_30%),linear-gradient(135deg,#0b232b,#123943_62%,#0b232b)]" />
@@ -33,7 +32,7 @@ export default function Hero({ data = {}, brandName = "طاقة هوم", brandNa
           <p className="mt-5 max-w-xl text-sm leading-8 text-surface/52 sm:text-base">{data.heroDescription || "من الغسالة التي تفهم إيقاع يومك إلى المنظومة الشمسية التي تفهم احتياج منزلك؛ نختار لك تقنيات جميلة، عملية، وتدوم."}</p>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <button onClick={scrollToProducts} className="btn btn-lg gap-3 bg-accent text-brand hover:bg-solar">{data.heroPrimaryButton || "اكتشف التشكيلة"}<ArrowLeft size={18} /></button>
+            <Link href="/products" className="btn btn-lg gap-3 bg-accent text-brand hover:bg-solar">{data.heroPrimaryButton || "اكتشف التشكيلة"}<ArrowLeft size={18} /></Link>
             <a href="#solar" className="btn btn-lg gap-3 border border-surface/20 bg-white/5 text-surface hover:bg-white/10">{data.heroSecondaryButton || "مختبر الطاقة"}<ArrowDownLeft size={17} /></a>
           </div>
 
