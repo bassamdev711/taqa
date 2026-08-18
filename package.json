@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "prisma generate && next build",
     "db:push": "prisma db push",
+    "db:seed:demo": "SEED_DEMO_DATA=true prisma db seed",
     "start": "next start",
     "lint": "eslint"
   },
